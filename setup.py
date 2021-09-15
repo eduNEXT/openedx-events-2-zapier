@@ -91,4 +91,9 @@ setup(
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.8',
     ],
+    entry_points={
+        "lms.djangoapp": [
+            "openedx_events_samples = openedx_events_samples.apps:OpenedxEventsSamplesConfig",
+        ],
+    },
 )
