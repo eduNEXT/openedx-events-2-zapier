@@ -6,6 +6,8 @@ import requests
 
 from django.conf import settings
 
+from openedx_events_2_zapier.utils import flatten_dict, serialize_course_key
+
 
 def send_user_data_to_webhook(**kwargs):
     """
@@ -13,35 +15,30 @@ def send_user_data_to_webhook(**kwargs):
 
     The data sent to the webhook is, for example:
     {
-        "user":
-            {
-                'id': 25,
-                'is_active': True,
-                'pii':
-                {
-                    'username':'test_9',
-                    'email': 'test_9@example.com',
-                    'name': 'test_9'
-                }
-            },
-        "event_information":
-            {
-                'id': UUID('e5797634-166f-11ec-9b48-0242ac13000b'),
-                'event_type': 'org.openedx.learning.student.registration.completed.v1',
-                'minorversion': 0,
-                'source': 'openedx/lms/web',
-                'sourcehost': 'lms.devstack.edx',
-                'time': datetime.datetime(2021, 9, 15, 21, 57, 18, 876654),
-                'sourcelib': [0, 6, 0]
-            }
+        'user_id': 39,
+        'user_is_active': True,
+        'user_pii_username': 'test',
+        'user_pii_email': 'test@example.com',
+        'user_pii_name': 'test',
+        'event_metadata_id': UUID('b1be2fac-1af1-11ec-bdf4-0242ac12000b'),
+        'event_metadata_event_type': 'org.openedx.learning.student.registration.completed.v1',
+        'event_metadata_minorversion': 0,
+        'event_metadata_source': 'openedx/lms/web',
+        'event_metadata_sourcehost': 'lms.devstack.edx',
+        'event_metadata_time': datetime.datetime(2021, 9, 21, 15, 36, 31, 311506),
+        'event_metadata_sourcelib': [0, 6, 0]
     }
+
+    This format is convenient for Zapier to read.
     """
     user_info = attr.asdict(kwargs.get("user"))
     event_metadata = attr.asdict(kwargs.get("metadata"))
+    zapier_payload = {
+        "user": user_info,
+        "event_metadata": event_metadata,
+    }
     requests.post(
         settings.ZAPIER_REGISTRATION_WEBHOOK,
-        {
-            "user": user_info,
-            "event_metadata": event_metadata,
-        }
+        flatten_dict(zapier_payload),
+    )
     )
