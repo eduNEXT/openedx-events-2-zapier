@@ -1,4 +1,4 @@
-openedx-events-samples
+openedx-events-2-zapier
 =============================
 
 |pypi-badge| |ci-badge| |codecov-badge| |doc-badge| |pyversions-badge|
@@ -31,11 +31,11 @@ One Time Setup
 .. code-block::
 
   # Clone the repository
-  git clone git@github.com:edx/openedx-events-samples.git
-  cd openedx-events-samples
+  git clone git@github.com:edx/openedx-events-2-zapier.git
+  cd openedx-events-2-zapier
 
   # Set up a virtualenv using virtualenvwrapper with the same name as the repo and activate it
-  mkvirtualenv -p python3.8 openedx-events-samples
+  mkvirtualenv -p python3.8 openedx-events-2-zapier
 
 
 Every time you develop something in this repo
@@ -43,7 +43,7 @@ Every time you develop something in this repo
 .. code-block::
 
   # Activate the virtualenv
-  workon openedx-events-samples
+  workon openedx-events-2-zapier
 
   # Grab the latest code
   git checkout master
@@ -113,26 +113,26 @@ For more information about these options, see the `Getting Help`_ page.
 .. _community Slack workspace: https://openedx.slack.com/
 .. _Getting Help: https://openedx.org/getting-help
 
-.. |pypi-badge| image:: https://img.shields.io/pypi/v/openedx-events-samples.svg
-    :target: https://pypi.python.org/pypi/openedx-events-samples/
+.. |pypi-badge| image:: https://img.shields.io/pypi/v/openedx-events-2-zapier.svg
+    :target: https://pypi.python.org/pypi/openedx-events-2-zapier/
     :alt: PyPI
 
-.. |ci-badge| image:: https://github.com/edx/openedx-events-samples/workflows/Python%20CI/badge.svg?branch=master
-    :target: https://github.com/edx/openedx-events-samples/actions
+.. |ci-badge| image:: https://github.com/edx/openedx-events-2-zapier/workflows/Python%20CI/badge.svg?branch=master
+    :target: https://github.com/edx/openedx-events-2-zapier/actions
     :alt: CI
 
-.. |codecov-badge| image:: https://codecov.io/github/edx/openedx-events-samples/coverage.svg?branch=master
-    :target: https://codecov.io/github/edx/openedx-events-samples?branch=master
+.. |codecov-badge| image:: https://codecov.io/github/edx/openedx-events-2-zapier/coverage.svg?branch=master
+    :target: https://codecov.io/github/edx/openedx-events-2-zapier?branch=master
     :alt: Codecov
 
-.. |doc-badge| image:: https://readthedocs.org/projects/openedx-events-samples/badge/?version=latest
-    :target: https://openedx-events-samples.readthedocs.io/en/latest/
+.. |doc-badge| image:: https://readthedocs.org/projects/openedx-events-2-zapier/badge/?version=latest
+    :target: https://openedx-events-2-zapier.readthedocs.io/en/latest/
     :alt: Documentation
 
-.. |pyversions-badge| image:: https://img.shields.io/pypi/pyversions/openedx-events-samples.svg
-    :target: https://pypi.python.org/pypi/openedx-events-samples/
+.. |pyversions-badge| image:: https://img.shields.io/pypi/pyversions/openedx-events-2-zapier.svg
+    :target: https://pypi.python.org/pypi/openedx-events-2-zapier/
     :alt: Supported Python versions
 
-.. |license-badge| image:: https://img.shields.io/github/license/edx/openedx-events-samples.svg
-    :target: https://github.com/edx/openedx-events-samples/blob/master/LICENSE.txt
+.. |license-badge| image:: https://img.shields.io/github/license/edx/openedx-events-2-zapier.svg
+    :target: https://github.com/edx/openedx-events-2-zapier/blob/master/LICENSE.txt
     :alt: License

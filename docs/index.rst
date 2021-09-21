@@ -1,9 +1,9 @@
-.. openedx-events-samples documentation top level file, created by
+.. openedx-events-2-zapier documentation top level file, created by
    sphinx-quickstart on Mon Sep 13 10:20:26 2021.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-openedx-events-samples
+openedx-events-2-zapier
 ======================
 
 This repository contains real-life use cases for Open edX Events.

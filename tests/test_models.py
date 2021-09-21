@@ -1,4 +1,4 @@
 #!/usr/bin/env python
 """
-Tests for the `openedx-events-samples` models module.
+Tests for the `openedx-events-2-zapier` models module.
 """

@@ -11,22 +11,22 @@ https://docs.djangoproject.com/en/2.22/ref/settings/
 # See https://docs.djangoproject.com/en/2.22/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'secret-key'
+SECRET_KEY = "secret-key"
 
 
 # Application definition
 
 INSTALLED_APPS = []
 
-ROOT_URLCONF = 'openedx_events_2_zapier.urls'
+ROOT_URLCONF = "openedx_events_2_zapier.urls"
 
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.22/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = "UTC"
 
 USE_TZ = True
 
