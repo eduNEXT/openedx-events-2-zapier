@@ -1,7 +1,7 @@
 [run]
 branch = True
 data_file = .coverage
-source=openedx_events_samples
+source=openedx_events_2_zapier
 omit =
     test_settings
     *migrations*

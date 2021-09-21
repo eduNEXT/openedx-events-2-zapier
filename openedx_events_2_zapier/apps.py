@@ -1,5 +1,5 @@
 """
-openedx_events_samples Django application initialization.
+openedx_events_2_zapier Django application initialization.
 """
 
 from django.apps import AppConfig
@@ -7,10 +7,10 @@ from django.apps import AppConfig
 
 class OpenedxEventsSamplesConfig(AppConfig):
     """
-    Configuration for the openedx_events_samples Django application.
+    Configuration for the openedx_events_2_zapier Django application.
     """
 
-    name = 'openedx_events_samples'
+    name = 'openedx_events_2_zapier'
 
     plugin_app = {
         'settings_config': {

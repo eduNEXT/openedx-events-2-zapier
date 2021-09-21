@@ -29,13 +29,13 @@ DATABASES = {
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'openedx_events_samples',
+    'openedx_events_2_zapier',
 )
 
 LOCALE_PATHS = [
-    root('openedx_events_samples', 'conf', 'locale'),
+    root('openedx_events_2_zapier', 'conf', 'locale'),
 ]
 
-ROOT_URLCONF = 'openedx_events_samples.urls'
+ROOT_URLCONF = 'openedx_events_2_zapier.urls'
 
 SECRET_KEY = 'insecure-secret-key'

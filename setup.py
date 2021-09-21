@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-Package metadata for openedx_events_samples.
+Package metadata for openedx_events_2_zapier.
 """
 import os
 import re
@@ -53,7 +53,7 @@ def is_requirement(line):
     return line and not line.startswith(('-r', '#', '-e', 'git+', '-c'))
 
 
-VERSION = get_version('openedx_events_samples', '__init__.py')
+VERSION = get_version('openedx_events_2_zapier', '__init__.py')
 
 if sys.argv[-1] == 'tag':
     print("Tagging the version on github:")
@@ -73,7 +73,7 @@ setup(
     author_email='oscm@edx.org',
     url='https://github.com/edx/openedx-events-samples',
     packages=[
-        'openedx_events_samples',
+        'openedx_events_2_zapier',
     ],
     include_package_data=True,
     install_requires=load_requirements('requirements/base.in'),
@@ -93,7 +93,7 @@ setup(
     ],
     entry_points={
         "lms.djangoapp": [
-            "openedx_events_samples = openedx_events_samples.apps:OpenedxEventsSamplesConfig",
+            "openedx_events_2_zapier = openedx_events_2_zapier.apps:OpenedxEventsSamplesConfig",
         ],
     },
 )

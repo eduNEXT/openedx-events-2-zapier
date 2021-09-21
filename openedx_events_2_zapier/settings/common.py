@@ -18,7 +18,7 @@ SECRET_KEY = 'secret-key'
 
 INSTALLED_APPS = []
 
-ROOT_URLCONF = 'openedx_events_samples.urls'
+ROOT_URLCONF = 'openedx_events_2_zapier.urls'
 
 
 # Internationalization
