@@ -9,6 +9,14 @@ attrs==21.2.0
     #   -r requirements/base.txt
     #   openedx-events
     #   pytest
+certifi==2021.5.30
+    # via
+    #   -r requirements/base.txt
+    #   requests
+charset-normalizer==2.0.6
+    # via
+    #   -r requirements/base.txt
+    #   requests
 click==8.0.1
     # via code-annotations
 code-annotations==1.2.0
@@ -23,6 +31,10 @@ edx-opaque-keys[django]==2.2.2
     # via
     #   -r requirements/base.txt
     #   openedx-events
+idna==3.2
+    # via
+    #   -r requirements/base.txt
+    #   requests
 iniconfig==1.1.1
     # via pytest
 jinja2==3.0.1
@@ -63,6 +75,8 @@ pytz==2021.1
     #   django
 pyyaml==5.4.1
     # via code-annotations
+requests==2.26.0
+    # via -r requirements/base.txt
 sqlparse==0.4.2
     # via
     #   -r requirements/base.txt
@@ -78,3 +92,7 @@ toml==0.10.2
     # via
     #   pytest
     #   pytest-cov
+urllib3==1.26.6
+    # via
+    #   -r requirements/base.txt
+    #   requests

@@ -4,7 +4,7 @@
 #
 #    make upgrade
 #
-astroid==2.7.3
+astroid==2.8.0
     # via
     #   pylint
     #   pylint-celery
@@ -16,11 +16,15 @@ attrs==21.2.0
 bleach==4.1.0
     # via readme-renderer
 certifi==2021.5.30
-    # via requests
+    # via
+    #   -r requirements/test.txt
+    #   requests
 cffi==1.14.6
     # via cryptography
-charset-normalizer==2.0.5
-    # via requests
+charset-normalizer==2.0.6
+    # via
+    #   -r requirements/test.txt
+    #   requests
 click==8.0.1
     # via
     #   -r requirements/test.txt
@@ -55,7 +59,9 @@ edx-opaque-keys[django]==2.2.2
     #   -r requirements/test.txt
     #   openedx-events
 idna==3.2
-    # via requests
+    # via
+    #   -r requirements/test.txt
+    #   requests
 importlib-metadata==4.8.1
     # via
     #   keyring
@@ -117,7 +123,7 @@ pydocstyle==6.1.1
     # via -r requirements/quality.in
 pygments==2.10.0
     # via readme-renderer
-pylint==2.10.2
+pylint==2.11.1
     # via
     #   edx-lint
     #   pylint-celery
@@ -164,6 +170,7 @@ readme-renderer==29.0
     # via twine
 requests==2.26.0
     # via
+    #   -r requirements/test.txt
     #   requests-toolbelt
     #   twine
 requests-toolbelt==0.9.1
@@ -198,12 +205,18 @@ toml==0.10.2
     #   pylint
     #   pytest
     #   pytest-cov
-tqdm==4.62.2
+tqdm==4.62.3
     # via twine
 twine==3.4.2
     # via -r requirements/quality.in
+typing-extensions==3.10.0.2
+    # via
+    #   astroid
+    #   pylint
 urllib3==1.26.6
-    # via requests
+    # via
+    #   -r requirements/test.txt
+    #   requests
 webencodings==0.5.1
     # via bleach
 wrapt==1.12.1

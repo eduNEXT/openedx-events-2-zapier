@@ -6,6 +6,10 @@
 #
 attrs==21.2.0
     # via openedx-events
+certifi==2021.5.30
+    # via requests
+charset-normalizer==2.0.6
+    # via requests
 django==2.2.24
     # via
     #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
@@ -13,6 +17,8 @@ django==2.2.24
     #   openedx-events
 edx-opaque-keys[django]==2.2.2
     # via openedx-events
+idna==3.2
+    # via requests
 openedx-events==0.6.0
     # via -r requirements/base.in
 pbr==5.6.0
@@ -21,7 +27,11 @@ pymongo==3.12.0
     # via edx-opaque-keys
 pytz==2021.1
     # via django
+requests==2.26.0
+    # via -r requirements/base.in
 sqlparse==0.4.2
     # via django
 stevedore==3.4.0
     # via edx-opaque-keys
+urllib3==1.26.6
+    # via requests
