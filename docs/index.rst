@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 openedx-events-2-zapier
-======================
+=======================
 
 This repository contains real-life use cases for Open edX Events.
 
