@@ -1,5 +1,5 @@
 .PHONY: clean compile_translations coverage diff_cover docs dummy_translations \
-        extract_translations fake_translations help pii_check pull_translations push_translations \
+        extract_translations fake_translations help pull_translations push_translations \
         quality requirements selfcheck test test-all upgrade validate
 
 .DEFAULT_GOAL := help
@@ -50,9 +50,6 @@ upgrade: ## update the requirements/*.txt files with the latest packages satisfy
 quality: ## check coding style with pycodestyle and pylint
 	tox -e quality
 
-pii_check: ## check for PII annotations on all Django models
-	tox -e pii_check
-
 requirements: ## install development environment requirements
 	pip install -qr requirements/pip-tools.txt
 	pip-sync requirements/dev.txt requirements/private.*
@@ -63,10 +60,10 @@ test: clean ## run tests in the current virtualenv
 diff_cover: test ## find diff lines that need test coverage
 	diff-cover coverage.xml
 
-test-all: quality pii_check ## run tests on every supported Python/Django combination
+test-all: quality ## run tests on every supported Python/Django combination
 	tox
 
-validate: quality pii_check test ## run tests and quality checks
+validate: quality test ## run tests and quality checks
 
 selfcheck: ## check that the Makefile is well-formed
 	@echo "The Makefile is well-formed."
