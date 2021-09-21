@@ -11,30 +11,44 @@ https://docs.djangoproject.com/en/2.22/ref/settings/
 # See https://docs.djangoproject.com/en/2.22/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'secret-key'
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": "default.db",
+        "USER": "",
+        "PASSWORD": "",
+        "HOST": "",
+        "PORT": "",
+    },
+    "read_replica": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": "read_replica.db",
+        "USER": "",
+        "PASSWORD": "",
+        "HOST": "",
+        "PORT": "",
+    },
+}
 
 
-# Application definition
+INSTALLED_APPS = (
+    "openedx_events",
+)
 
-INSTALLED_APPS = []
+SECRET_KEY = "not-so-secret-key"
 
-ROOT_URLCONF = 'eox_hooks.urls'
+ROOT_URLCONF = "openedx_events_2_zapier.urls"
 
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.22/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = "UTC"
 
 USE_TZ = True
 
-
-def plugin_settings(settings):
-    """
-    Set of plugin settings used by the Open Edx platform.
-    More info: https://github.com/edx/edx-platform/blob/master/openedx/core/djangoapps/plugins/README.rst
-    """
-    settings.ZAPIER_REGISTRATION_WEBHOOK = ""
-    settings.ZAPIER_ENROLLMENT_WEBHOOK = ""
+# Zapier webhooks endpoints
+ZAPIER_REGISTRATION_WEBHOOK = ""
+ZAPIER_ENROLLMENT_WEBHOOK = ""

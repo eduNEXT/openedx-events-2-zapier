@@ -1,9 +1,8 @@
 """
 Where handlers for Open edX Events are defined.
 """
-import attr
 import requests
-
+from attr import asdict
 from django.conf import settings
 
 from openedx_events_2_zapier.utils import flatten_dict, serialize_course_key
@@ -11,7 +10,7 @@ from openedx_events_2_zapier.utils import flatten_dict, serialize_course_key
 
 def send_user_data_to_webhook(**kwargs):
     """
-    Handler that POST user's data after STUDENT_REGISTRATION_COMPLETED event is sent.
+    POST user's data after STUDENT_REGISTRATION_COMPLETED event is sent.
 
     The data sent to the webhook is, for example:
     {
@@ -31,8 +30,8 @@ def send_user_data_to_webhook(**kwargs):
 
     This format is convenient for Zapier to read.
     """
-    user_info = attr.asdict(kwargs.get("user"))
-    event_metadata = attr.asdict(kwargs.get("metadata"))
+    user_info = asdict(kwargs.get("user"))
+    event_metadata = asdict(kwargs.get("metadata"))
     zapier_payload = {
         "user": user_info,
         "event_metadata": event_metadata,
@@ -45,15 +44,15 @@ def send_user_data_to_webhook(**kwargs):
 
 def send_enrollment_data_to_webhook(**kwargs):
     """
-    Handler that POST enrollment's data after COURSE_ENROLLMENT_CREATED event is sent.
+    POST enrollment's data after COURSE_ENROLLMENT_CREATED event is sent.
 
     The data sent to the webhook is, for example:
     {
         'enrollment_user_id': 42,
         'enrollment_user_is_active': True,
-        'enrollment_user_pii_username': 'majo5',
-        'enrollment_user_pii_email': 'majo5@example.com',
-        'enrollment_user_pii_name': 'majo5',
+        'enrollment_user_pii_username': 'test',
+        'enrollment_user_pii_email': 'test@example.com',
+        'enrollment_user_pii_name': 'test',
         'enrollment_course_course_key': 'course-v1:edX+100+2021',
         'enrollment_course_display_name':'Demonstration Course',
         'enrollment_course_start': None,
@@ -72,8 +71,11 @@ def send_enrollment_data_to_webhook(**kwargs):
     }
     This format is convenient for Zapier to read.
     """
-    enrollment_info = attr.asdict(kwargs.get("enrollment"), value_serializer=serialize_course_key)
-    event_metadata = attr.asdict(kwargs.get("metadata"))
+    enrollment_info = asdict(
+        kwargs.get("enrollment"),
+        value_serializer=serialize_course_key,
+    )
+    event_metadata = asdict(kwargs.get("metadata"))
     zapier_payload = {
         "enrollment": enrollment_info,
         "event_metadata": event_metadata,
