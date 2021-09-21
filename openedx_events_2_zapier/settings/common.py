@@ -37,3 +37,4 @@ def plugin_settings(settings):
     More info: https://github.com/edx/edx-platform/blob/master/openedx/core/djangoapps/plugins/README.rst
     """
     settings.ZAPIER_REGISTRATION_WEBHOOK = ""
+    settings.ZAPIER_ENROLLMENT_WEBHOOK = ""

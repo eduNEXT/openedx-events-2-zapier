@@ -36,4 +36,5 @@ def plugin_settings(settings):
     Set of plugin settings used by the Open Edx platform.
     More info: https://github.com/edx/edx-platform/blob/master/openedx/core/djangoapps/plugins/README.rst
     """
-    settings.ZAPIER_REGISTRATION_WEBHOOK = "eox_hooks.edxapp_wrapper.backends.enrollments_j_v1"
+    settings.ZAPIER_REGISTRATION_WEBHOOK = ""
+    settings.ZAPIER_ENROLLMENT_WEBHOOK = ""
