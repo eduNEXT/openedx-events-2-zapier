@@ -1,27 +1,34 @@
 openedx-events-2-zapier
 =============================
 
-|pypi-badge| |ci-badge| |codecov-badge| |doc-badge| |pyversions-badge|
-|license-badge|
+|ci-badge| |license-badge|
 
-The ``README.rst`` file should start with a brief description of the repository,
-which sets it in the context of other repositories under the ``edx``
-organization. It should make clear where this fits in to the overall edX
-codebase.
+A ready-to-use repository that contains real-life use cases for Open edX Events.
 
-This repository contains real-life use cases for Open edX Events.
+Overview
+---------
 
-Overview (please modify)
-------------------------
+One of the most common use cases in eduNEXT for events is sending information to Zapier,
+so this repository does exactly that, creates receivers for two key events:
 
-The ``README.rst`` file should then provide an overview of the code in this
-repository, including the main components and useful entry points for starting
-to understand the code in more detail.
+- Registration (STUDENT_REGISTRATION_COMPLETED)
+- Enrollment (COURSE_ENROLLMENT_CREATED)
 
-Documentation
--------------
+Checkout `receivers.py <https://github.com/eduNEXT/openedx-events-2-zapier/blob/main/openedx_events_2_zapier/receivers.py>`_ for implementation details.
+For more information about openedx-events: https://github.com/eduNEXT/openedx-events
 
-(TODO: `Set up documentation <https://openedx.atlassian.net/wiki/spaces/DOC/pages/21627535/Publish+Documentation+on+Read+the+Docs>`_)
+Usage
+-----
+
+After installing the plugin, please modify the following settings in common.py or production.y (through env-tokens):
+
+.. code-block:: python
+
+
+    ZAPIER_REGISTRATION_WEBHOOK
+    ZAPIER_ENROLLMENT_WEBHOOK
+
+Now, you're ready to go.
 
 Development Workflow
 --------------------
@@ -113,26 +120,10 @@ For more information about these options, see the `Getting Help`_ page.
 .. _community Slack workspace: https://openedx.slack.com/
 .. _Getting Help: https://openedx.org/getting-help
 
-.. |pypi-badge| image:: https://img.shields.io/pypi/v/openedx-events-2-zapier.svg
-    :target: https://pypi.python.org/pypi/openedx-events-2-zapier/
-    :alt: PyPI
-
-.. |ci-badge| image:: https://github.com/edx/openedx-events-2-zapier/workflows/Python%20CI/badge.svg?branch=master
+.. |ci-badge| image:: https://github.com/eduNEXT/openedx-events-2-zapier/workflows/Python%20CI/badge.svg?branch=main
     :target: https://github.com/edx/openedx-events-2-zapier/actions
     :alt: CI
 
-.. |codecov-badge| image:: https://codecov.io/github/edx/openedx-events-2-zapier/coverage.svg?branch=master
-    :target: https://codecov.io/github/edx/openedx-events-2-zapier?branch=master
-    :alt: Codecov
-
-.. |doc-badge| image:: https://readthedocs.org/projects/openedx-events-2-zapier/badge/?version=latest
-    :target: https://openedx-events-2-zapier.readthedocs.io/en/latest/
-    :alt: Documentation
-
-.. |pyversions-badge| image:: https://img.shields.io/pypi/pyversions/openedx-events-2-zapier.svg
-    :target: https://pypi.python.org/pypi/openedx-events-2-zapier/
-    :alt: Supported Python versions
-
-.. |license-badge| image:: https://img.shields.io/github/license/edx/openedx-events-2-zapier.svg
-    :target: https://github.com/edx/openedx-events-2-zapier/blob/master/LICENSE.txt
+.. |license-badge| image:: https://img.shields.io/github/license/eduNEXT/openedx-events-2-zapier.svg
+    :target: https://github.com/eduNEXT/openedx-events-2-zapier/blob/main/LICENSE.txt
     :alt: License
