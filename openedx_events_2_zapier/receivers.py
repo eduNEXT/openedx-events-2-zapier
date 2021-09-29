@@ -8,7 +8,7 @@ from django.conf import settings
 from openedx_events_2_zapier.utils import flatten_dict, serialize_course_key
 
 
-def send_user_data_to_webhook(**kwargs):
+def send_user_data_to_webhook(user, **kwargs):
     """
     POST user's data after STUDENT_REGISTRATION_COMPLETED event is sent.
 
@@ -29,7 +29,7 @@ def send_user_data_to_webhook(**kwargs):
 
     This format is convenient for Zapier to read.
     """
-    user_info = asdict(kwargs.get("user"))
+    user_info = asdict(user)
     event_metadata = asdict(kwargs.get("metadata"))
     zapier_payload = {
         "user": user_info,
@@ -41,7 +41,7 @@ def send_user_data_to_webhook(**kwargs):
     )
 
 
-def send_enrollment_data_to_webhook(**kwargs):
+def send_enrollment_data_to_webhook(enrollment, **kwargs):
     """
     POST enrollment's data after COURSE_ENROLLMENT_CREATED event is sent.
 
@@ -71,7 +71,7 @@ def send_enrollment_data_to_webhook(**kwargs):
     This format is convenient for Zapier to read.
     """
     enrollment_info = asdict(
-        kwargs.get("enrollment"),
+        enrollment,
         value_serializer=serialize_course_key,
     )
     event_metadata = asdict(kwargs.get("metadata"))

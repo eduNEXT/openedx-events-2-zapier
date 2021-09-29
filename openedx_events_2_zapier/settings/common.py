@@ -18,8 +18,6 @@ SECRET_KEY = "secret-key"
 
 INSTALLED_APPS = []
 
-ROOT_URLCONF = "openedx_events_2_zapier.urls"
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.22/topics/i18n/
