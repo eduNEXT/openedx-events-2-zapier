@@ -1,11 +1,5 @@
 **Description:** Describe in a couple of sentences what this PR adds
 
-**JIRA:** Link to JIRA ticket
-
-**Dependencies:** dependencies on other outstanding PRs, issues, etc. 
-
-**Merge deadline:** List merge deadline (if any)
-
 **Installation instructions:** List any non-trivial installation 
 instructions.
 
