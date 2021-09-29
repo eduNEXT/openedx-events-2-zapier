@@ -1,7 +1,7 @@
 """
 Utilities used by Open edX Events Receivers.
 """
-import collections
+from collections.abc import MutableMapping
 
 from opaque_keys.edx.locator import CourseLocator
 
@@ -16,7 +16,7 @@ def flatten_dict(dictionary, parent_key="", sep="_"):
     items = []
     for key, value in dictionary.items():
         new_key = parent_key + sep + key if parent_key else key
-        if isinstance(value, collections.MutableMapping):
+        if isinstance(value, MutableMapping):
             items.extend(flatten_dict(value, new_key, sep=sep).items())
         else:
             items.append((new_key, value))

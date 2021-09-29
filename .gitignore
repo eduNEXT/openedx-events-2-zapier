@@ -31,8 +31,7 @@ pip-log.txt
 .tox
 coverage.xml
 htmlcov/
-
-
+tests/__init__.py
 
 # The Silver Searcher
 .agignore
@@ -59,3 +58,7 @@ docs/openedx_events_2_zapier.*.rst
 # Private requirements
 requirements/private.in
 requirements/private.txt
+
+# Virtualenv artifacts
+venv/
+venv3/
