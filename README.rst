@@ -8,25 +8,35 @@ A ready-to-use repository that contains real-life use cases for Open edX Events.
 Overview
 ---------
 
-One of the most common use cases in eduNEXT for events is sending information to Zapier,
-so this repository does exactly that, creates receivers for two key events:
+One common use cases for open edx instances is to connect enrollment and
+registration events to custom workflows that enhance the user experience.
+At edunext, we have found that sending this information to Zapier is a very
+flexible and robut way to achieve this. This repository makes just that very
+easy. By installing and configuring it creates receivers for the two events:
 
 - Registration (STUDENT_REGISTRATION_COMPLETED)
+  `org.openedx.learning.student.registration.completed.v1`
+
 - Enrollment (COURSE_ENROLLMENT_CREATED)
+  `org.openedx.learning.course.enrollment.created.v1`
+
+And then formats the information in a zappier friendly way and sends it.
 
 Checkout `receivers.py <https://github.com/eduNEXT/openedx-events-2-zapier/blob/main/openedx_events_2_zapier/receivers.py>`_ for implementation details.
-For more information about openedx-events: https://github.com/eduNEXT/openedx-events
+
+For more information see `Open edX Events`_ and `Hooks framework`_.
 
 Usage
 -----
 
-After installing the plugin, please modify the following settings in common.py or production.y (through env-tokens):
+After installing the plugin, please modify the following settings in common.py
+or production.py (through env-tokens) with the url for your own zappier webhook:
 
 .. code-block:: python
 
 
-    ZAPIER_REGISTRATION_WEBHOOK
-    ZAPIER_ENROLLMENT_WEBHOOK
+    ZAPIER_REGISTRATION_WEBHOOK = "https://hooks.zapier.com/hooks/catch/<account>/<webhook>/"
+    ZAPIER_ENROLLMENT_WEBHOOK = "https://hooks.zapier.com/hooks/catch/<account>/<webhook>/"
 
 Now, you're ready to go.
 
@@ -92,33 +102,32 @@ How To Contribute
 -----------------
 
 Contributions are very welcome.
-Please read `How To Contribute <https://github.com/edx/edx-platform/blob/master/CONTRIBUTING.rst>`_ for details.
-Even though they were written with ``edx-platform`` in mind, the guidelines
-should be followed for all Open edX projects.
 
-The pull request description template should be automatically applied if you are creating a pull request from GitHub. Otherwise you
-can find it at `PULL_REQUEST_TEMPLATE.md <.github/PULL_REQUEST_TEMPLATE.md>`_.
+The pull request description template should be automatically applied if you are
+creating a pull request from GitHub. Otherwise you can find it at
+`PULL_REQUEST_TEMPLATE.md <.github/PULL_REQUEST_TEMPLATE.md>`_.
 
-The issue report template should be automatically applied if you are creating an issue on GitHub as well. Otherwise you
-can find it at `ISSUE_TEMPLATE.md <.github/ISSUE_TEMPLATE.md>`_.
+The issue report template should be automatically applied if you are creating
+an issue on GitHub as well. Otherwise you can find it at
+`ISSUE_TEMPLATE.md <.github/ISSUE_TEMPLATE.md>`_.
 
 Reporting Security Issues
 -------------------------
 
-Please do not report security issues in public. Please email security@edx.org.
+Please do not report security issues in public. Please email security@edunext.co.
 
 Getting Help
 ------------
 
-If you're having trouble, we have discussion forums at https://discuss.openedx.org where you can connect with others in the community.
+This project was written in the context of the `Hooks framework`_ for open edx.
+If you need help with it, the best way forward would be throught the Open edX
+community at https://discuss.openedx.org where you can connect with both the
+authors and other users in the community.
 
-Our real-time conversations are on Slack. You can request a `Slack invitation`_, then join our `community Slack workspace`_.
 
-For more information about these options, see the `Getting Help`_ page.
+.. _Hooks framework: https://open-edx-proposals.readthedocs.io/en/latest/oep-0050-hooks-extension-framework.html
+.. _Open edX Events: https://open-edx-proposals.readthedocs.io/en/latest/oep-0050-hooks-extension-framework.html
 
-.. _Slack invitation: https://openedx-slack-invite.herokuapp.com/
-.. _community Slack workspace: https://openedx.slack.com/
-.. _Getting Help: https://openedx.org/getting-help
 
 .. |ci-badge| image:: https://github.com/eduNEXT/openedx-events-2-zapier/workflows/Python%20CI/badge.svg?branch=main
     :target: https://github.com/edx/openedx-events-2-zapier/actions
