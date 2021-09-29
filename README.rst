@@ -11,7 +11,7 @@ Overview
 One common use cases for open edx instances is to connect enrollment and
 registration events to custom workflows that enhance the user experience.
 At edunext, we have found that sending this information to Zapier is a very
-flexible and robut way to achieve this. This repository makes just that very
+flexible and robust way to achieve this. This repository makes just that very
 easy. By installing and configuring it creates receivers for the two events:
 
 - Registration (STUDENT_REGISTRATION_COMPLETED)
@@ -30,7 +30,7 @@ Usage
 -----
 
 After installing the plugin, please modify the following settings in common.py
-or production.py (through env-tokens) with the url for your own zappier webhook:
+or production.py (through env-tokens) with the URL for your own zappier webhook:
 
 .. code-block:: python
 
