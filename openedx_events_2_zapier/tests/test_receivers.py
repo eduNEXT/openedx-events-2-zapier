@@ -6,11 +6,11 @@ Classes:
 import datetime
 from unittest.mock import patch
 
-from django.conf import settings
 from django.test import TestCase
 from opaque_keys.edx.keys import CourseKey
 from openedx_events.data import EventsMetadata
 from openedx_events.learning.data import CourseData, CourseEnrollmentData, UserData, UserPersonalData
+from openedx_events.learning.signals import COURSE_ENROLLMENT_CREATED, STUDENT_REGISTRATION_COMPLETED
 
 from openedx_events_2_zapier.receivers import send_enrollment_data_to_webhook, send_user_data_to_webhook
 
@@ -40,30 +40,32 @@ class RegistrationCompletedReceiverTest(TestCase):
         )
 
     @patch("openedx_events_2_zapier.receivers.requests")
-    def test_send_payload_success(self, request_mock):
+    def test_receiver_called_after_event(self, request_mock):
         """
-        Test that send_user_data_to_webhook sends the correct information to Zapier webhook.
+        Test that send_user_data_to_webhook is called the correct information after sending
+        STUDENT_REGISTRATION_COMPLETED event.
         """
-        expected_payload = {
+        expected_payload_subset = {
             "user_id": 39,
             "user_is_active": True,
             "user_pii_username": "test",
             "user_pii_email": "test@example.com",
             "user_pii_name": "Test Example",
-            "event_metadata_id": self.metadata.id,
             "event_metadata_event_type": self.metadata.event_type,
             "event_metadata_minorversion": self.metadata.minorversion,
             "event_metadata_source": self.metadata.source,
             "event_metadata_sourcehost": self.metadata.sourcehost,
-            "event_metadata_time": self.metadata.time,
             "event_metadata_sourcelib": list(self.metadata.sourcelib),
         }
+        STUDENT_REGISTRATION_COMPLETED.connect(send_user_data_to_webhook)
 
-        send_user_data_to_webhook(user=self.user, metadata=self.metadata)
+        STUDENT_REGISTRATION_COMPLETED.send_event(
+            user=self.user,
+        )
 
-        request_mock.post.assert_called_once_with(
-            settings.ZAPIER_REGISTRATION_WEBHOOK,
-            expected_payload,
+        self.assertDictContainsSubset(
+            expected_payload_subset,
+            request_mock.post.call_args.args[1],
         )
 
 
@@ -101,11 +103,12 @@ class EnrollmentCreatedReceiverTest(TestCase):
         )
 
     @patch("openedx_events_2_zapier.receivers.requests")
-    def test_send_payload_success(self, request_mock):
+    def test_receiver_called_after_event(self, request_mock):
         """
-        Test that send_enrollment_data_to_webhook sends the correct information to Zapier webhook.
+        Test that send_user_data_to_webhook is called the correct information after sending
+        COURSE_ENROLLMENT_CREATED event.
         """
-        expected_payload = {
+        expected_payload_subset = {
             "enrollment_user_id": 42,
             "enrollment_user_is_active": True,
             "enrollment_user_pii_username": "test",
@@ -119,18 +122,19 @@ class EnrollmentCreatedReceiverTest(TestCase):
             "enrollment_is_active": True,
             "enrollment_creation_date": datetime.datetime(2021, 9, 21, 17, 40, 27),
             "enrollment_created_by": None,
-            "event_metadata_id": self.metadata.id,
             "event_metadata_event_type": self.metadata.event_type,
             "event_metadata_minorversion": self.metadata.minorversion,
             "event_metadata_source": self.metadata.source,
             "event_metadata_sourcehost": self.metadata.sourcehost,
-            "event_metadata_time": self.metadata.time,
             "event_metadata_sourcelib": list(self.metadata.sourcelib),
         }
+        COURSE_ENROLLMENT_CREATED.connect(send_enrollment_data_to_webhook)
 
-        send_enrollment_data_to_webhook(enrollment=self.enrollment, metadata=self.metadata)
+        COURSE_ENROLLMENT_CREATED.send_event(
+            enrollment=self.enrollment,
+        )
 
-        request_mock.post.assert_called_once_with(
-            settings.ZAPIER_ENROLLMENT_WEBHOOK,
-            expected_payload,
+        self.assertDictContainsSubset(
+            expected_payload_subset,
+            request_mock.post.call_args.args[1],
         )
