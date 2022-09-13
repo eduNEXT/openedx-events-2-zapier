@@ -37,6 +37,10 @@ class OpenedxEventsSamplesConfig(AppConfig):
                         "receiver_func_name": "send_enrollment_data_to_webhook",
                         "signal_path": "openedx_events.learning.signals.COURSE_ENROLLMENT_CREATED",
                     },
+                    {
+                        "receiver_func_name": "send_persistent_grade_course_data_to_webhook",
+                        "signal_path": "openedx_events.learning.signals.PERSISTENT_GRADE_SUMMARY_CHANGED",
+                    },
                 ],
             }
         },
