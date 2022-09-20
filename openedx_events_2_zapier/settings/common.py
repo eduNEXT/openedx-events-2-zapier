@@ -36,3 +36,4 @@ def plugin_settings(settings):
     """
     settings.ZAPIER_REGISTRATION_WEBHOOK = ""
     settings.ZAPIER_ENROLLMENT_WEBHOOK = ""
+    settings.ZAPIER_PERSISTENT_GRADE_COURSE_WEBHOOK = ""

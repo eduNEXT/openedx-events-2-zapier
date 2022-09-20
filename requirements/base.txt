@@ -19,7 +19,7 @@ edx-opaque-keys[django]==2.2.2
     # via openedx-events
 idna==3.2
     # via requests
-openedx-events==0.6.0
+openedx-events==0.13.0
     # via -r requirements/base.in
 pbr==5.6.0
     # via stevedore

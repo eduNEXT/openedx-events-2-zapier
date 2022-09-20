@@ -9,10 +9,24 @@ from unittest.mock import patch
 from django.test import TestCase
 from opaque_keys.edx.keys import CourseKey
 from openedx_events.data import EventsMetadata
-from openedx_events.learning.data import CourseData, CourseEnrollmentData, UserData, UserPersonalData
-from openedx_events.learning.signals import COURSE_ENROLLMENT_CREATED, STUDENT_REGISTRATION_COMPLETED
+from openedx_events.learning.data import (
+    CourseData,
+    CourseEnrollmentData,
+    PersistentCourseGradeData,
+    UserData,
+    UserPersonalData,
+)
+from openedx_events.learning.signals import (
+    COURSE_ENROLLMENT_CREATED,
+    PERSISTENT_GRADE_SUMMARY_CHANGED,
+    STUDENT_REGISTRATION_COMPLETED,
+)
 
-from openedx_events_2_zapier.receivers import send_enrollment_data_to_webhook, send_user_data_to_webhook
+from openedx_events_2_zapier.receivers import (
+    send_enrollment_data_to_webhook,
+    send_persistent_grade_course_data_to_webhook,
+    send_user_data_to_webhook,
+)
 
 
 class RegistrationCompletedReceiverTest(TestCase):
@@ -132,6 +146,69 @@ class EnrollmentCreatedReceiverTest(TestCase):
 
         COURSE_ENROLLMENT_CREATED.send_event(
             enrollment=self.enrollment,
+        )
+
+        self.assertDictContainsSubset(
+            expected_payload_subset,
+            request_mock.post.call_args.args[1],
+        )
+
+
+class PersistentGradeEventsTest(TestCase):
+    """
+        Test that send_persistent_grade_course_data_to_webhook is called the correct information after sending
+        COURSE_ENROLLMENT_CREATED event.
+    """
+
+    def setUp(self):
+        """
+        Setup common conditions for every test case.
+        """
+        super().setUp()
+        self.grade = PersistentCourseGradeData(
+            user_id=42,
+            course=CourseData(
+                course_key=CourseKey.from_string("course-v1:edX+100+2021"),
+                display_name="Demonstration Course"
+            ),
+            course_edited_timestamp=datetime.datetime(2021, 9, 21, 17, 40, 27),
+            course_version="",
+            grading_policy_hash="",
+            percent_grade=80,
+            letter_grade="Great",
+            passed_timestamp=datetime.datetime(2021, 9, 21, 17, 40, 27)
+        )
+        self.metadata = EventsMetadata(
+            event_type="org.openedx.learning.course.persistent_grade_summary.changed.v1",
+            minorversion=0,
+        )
+
+    @patch("openedx_events_2_zapier.receivers.requests")
+    def test_receiver_called_after_event(self, request_mock):
+        """
+        Test that send_persistent_grade_course_data_to_webhook is called the correct information after sending
+        COURSE_ENROLLMENT_CREATED event.
+        """
+        expected_payload_subset = {
+            "grade_user_id": 42,
+            "grade_course_course_key": "course-v1:edX+100+2021",
+            "grade_course_display_name": "Demonstration Course",
+            "grade_course_edited_timestamp": datetime.datetime(2021, 9, 21, 17, 40, 27),
+            "grade_course_version": "",
+            "grade_grading_policy_hash": "",
+            "grade_percent_grade": 80,
+            "grade_letter_grade": "Great",
+            "grade_passed_timestamp": datetime.datetime(2021, 9, 21, 17, 40, 27),
+            "event_metadata_event_type": self.metadata.event_type,
+            "event_metadata_minorversion": self.metadata.minorversion,
+            "event_metadata_source": self.metadata.source,
+            "event_metadata_sourcehost": self.metadata.sourcehost,
+            "event_metadata_sourcelib": list(self.metadata.sourcelib),
+        }
+        PERSISTENT_GRADE_SUMMARY_CHANGED.connect(send_persistent_grade_course_data_to_webhook)
+
+        PERSISTENT_GRADE_SUMMARY_CHANGED.send_event(
+            grade=self.grade,
         )
 
         self.assertDictContainsSubset(

@@ -92,7 +92,7 @@ markupsafe==2.0.1
     #   jinja2
 mccabe==0.6.1
     # via pylint
-openedx-events==0.6.0
+openedx-events==0.13.0
     # via -r requirements/test.txt
 packaging==21.0
     # via
