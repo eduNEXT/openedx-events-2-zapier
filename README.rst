@@ -17,7 +17,7 @@ easy. By installing and configuring, it creates receivers for three events:
 +-------------------------------------+-----------------------------------------------------------+---------------------------------------------------------------------+
 | Name                                | Type                                                      | Description                                                         |
 +=====================================+===========================================================+=====================================================================+
-| STUDENT_REGISTRATION_COMPLETED      | org.openedx.learning.student.registration.completed.v1    | Emitted when the user registration process in the LMS is completed. |            
+| STUDENT_REGISTRATION_COMPLETED      | org.openedx.learning.student.registration.completed.v1    | Emitted when the user registration process in the LMS is completed. |
 +-------------------------------------+-----------------------------------------------------------+---------------------------------------------------------------------+
 | COURSE_ENROLLMENT_CREATED           | org.openedx.learning.course.enrollment.created.v1         | Emitted when the user's enrollment process is completed.            |
 +-------------------------------------+-----------------------------------------------------------+---------------------------------------------------------------------+
@@ -26,7 +26,7 @@ easy. By installing and configuring, it creates receivers for three events:
 
 These receivers are configured with:
 
-.. code-block:: 
+.. code-block::
 
     plugin_app = {
         "settings_config": {
