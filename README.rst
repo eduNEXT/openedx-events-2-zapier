@@ -8,23 +8,57 @@ A ready-to-use repository that contains real-life use cases for Open edX Events.
 Overview
 ---------
 
-One common use cases for open edx instances is to connect enrollment and
+One common use case for open edx instances is to connect enrollment and
 registration events to custom workflows that enhance the user experience.
 At edunext, we have found that sending this information to Zapier is a very
 flexible and robust way to achieve this. This repository makes just that very
-easy. By installing and configuring it creates receivers for the two events:
+easy. By installing and configuring, it creates receivers for three events:
 
-- Registration (STUDENT_REGISTRATION_COMPLETED)
-  `org.openedx.learning.student.registration.completed.v1`
++-------------------------------------+-----------------------------------------------------------+---------------------------------------------------------------------+
+| Name                                | Type                                                      | Description                                                         |
++=====================================+===========================================================+=====================================================================+
+| STUDENT_REGISTRATION_COMPLETED      | org.openedx.learning.student.registration.completed.v1    | Emitted when the user registration process in the LMS is completed. |            
++-------------------------------------+-----------------------------------------------------------+---------------------------------------------------------------------+
+| COURSE_ENROLLMENT_CREATED           | org.openedx.learning.course.enrollment.created.v1         | Emitted when the user's enrollment process is completed.            |
++-------------------------------------+-----------------------------------------------------------+---------------------------------------------------------------------+
+| PERSISTENT_GRADE_SUMMARY_CHANGED    | org.openedx.learning.course.persistent_grade.summary.v1   | Emitted when a grade changes in the course                          |
++-------------------------------------+-----------------------------------------------------------+---------------------------------------------------------------------+
 
-- Enrollment (COURSE_ENROLLMENT_CREATED)
-  `org.openedx.learning.course.enrollment.created.v1`
+These receivers are configured with:
 
-And then formats the information in a zappier friendly way and sends it.
+.. code-block:: 
+
+    plugin_app = {
+        "settings_config": {
+            ...
+        },
+        "signals_config": {
+            "lms.djangoapp": {
+                "relative_path": "receivers",
+                "receivers": [
+                    {
+                        "receiver_func_name": "send_user_data_to_webhook",
+                        "signal_path": "openedx_events.learning.signals.STUDENT_REGISTRATION_COMPLETED",
+                    },
+                    {
+                        "receiver_func_name": "send_enrollment_data_to_webhook",
+                        "signal_path": "openedx_events.learning.signals.COURSE_ENROLLMENT_CREATED",
+                    },
+                    {
+                        "receiver_func_name": "send_persistent_grade_course_data_to_webhook",
+                        "signal_path": "openedx_events.learning.signals.PERSISTENT_GRADE_SUMMARY_CHANGED",
+                    },
+                ],
+            }
+        },
+    }
+
+So they can be used out of the box after installing this plugin. Each receiver, formats the data into the serialized dictionary so it's zappier friendly,
+and then sends it based on the configuration settings.
 
 Checkout `receivers.py <https://github.com/eduNEXT/openedx-events-2-zapier/blob/main/openedx_events_2_zapier/receivers.py>`_ for implementation details.
 
-For more information see `Open edX Events`_ and `Hooks framework`_.
+For more information, see `Open edX Events`_ and `Hooks framework`_.
 
 Usage
 -----
@@ -126,11 +160,11 @@ authors and other users in the community.
 
 
 .. _Hooks framework: https://open-edx-proposals.readthedocs.io/en/latest/oep-0050-hooks-extension-framework.html
-.. _Open edX Events: https://open-edx-proposals.readthedocs.io/en/latest/oep-0050-hooks-extension-framework.html
+.. _Open edX Events: https://docs.openedx.org/projects/openedx-events/en/latest/
 
 
 .. |ci-badge| image:: https://github.com/eduNEXT/openedx-events-2-zapier/workflows/Python%20CI/badge.svg?branch=main
-    :target: https://github.com/edx/openedx-events-2-zapier/actions
+    :target: https://github.com/eduNEXT/openedx-events-2-zapier/actions
     :alt: CI
 
 .. |license-badge| image:: https://img.shields.io/github/license/eduNEXT/openedx-events-2-zapier.svg
