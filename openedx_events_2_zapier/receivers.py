@@ -7,6 +7,8 @@ from django.conf import settings
 
 from openedx_events_2_zapier.utils import flatten_dict, serialize_course_key
 
+ZAPIER_REQUEST_TIMEOUT = 5
+
 
 def send_user_data_to_webhook(user, **kwargs):
     """
@@ -38,6 +40,7 @@ def send_user_data_to_webhook(user, **kwargs):
     requests.post(
         settings.ZAPIER_REGISTRATION_WEBHOOK,
         flatten_dict(zapier_payload),
+        timeout=ZAPIER_REQUEST_TIMEOUT,
     )
 
 
@@ -82,6 +85,7 @@ def send_enrollment_data_to_webhook(enrollment, **kwargs):
     requests.post(
         settings.ZAPIER_ENROLLMENT_WEBHOOK,
         flatten_dict(zapier_payload),
+        timeout=ZAPIER_REQUEST_TIMEOUT,
     )
 
 
@@ -122,4 +126,5 @@ def send_persistent_grade_course_data_to_webhook(grade, **kwargs):
     requests.post(
         settings.ZAPIER_PERSISTENT_GRADE_COURSE_WEBHOOK,
         flatten_dict(zapier_payload),
+        timeout=ZAPIER_REQUEST_TIMEOUT,
     )
