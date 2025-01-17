@@ -3,76 +3,148 @@ openedx-events-2-zapier
 
 |ci-badge| |license-badge|
 
-A ready-to-use repository that contains real-life use cases for Open edX Events.
+A ready-to-use repository demonstrating how to use Open edX Events for building workflows and automating integrations. It serves as a starting point for more advanced use cases. Explore Real-Life Use Cases for Open edX Events to see more complex implementations from the Open edX Community
+
+This repository is currently being maintained by the eduNEXT team.
 
 Overview
 ---------
 
-One common use case for open edx instances is to connect enrollment and
-registration events to custom workflows that enhance the user experience.
-At edunext, we have found that sending this information to Zapier is a very
-flexible and robust way to achieve this. This repository makes just that very
-easy. By installing and configuring, it creates receivers for three events:
+This repository demonstrates how to connect Open edX registration, enrollment, and grade change events to external tools via Zapier, enabling easier automation workflows through this third-party service.
 
-+-------------------------------------+-----------------------------------------------------------+---------------------------------------------------------------------+
-| Name                                | Type                                                      | Description                                                         |
-+=====================================+===========================================================+=====================================================================+
-| STUDENT_REGISTRATION_COMPLETED      | org.openedx.learning.student.registration.completed.v1    | Emitted when the user registration process in the LMS is completed. |
-+-------------------------------------+-----------------------------------------------------------+---------------------------------------------------------------------+
-| COURSE_ENROLLMENT_CREATED           | org.openedx.learning.course.enrollment.created.v1         | Emitted when the user's enrollment process is completed.            |
-+-------------------------------------+-----------------------------------------------------------+---------------------------------------------------------------------+
-| PERSISTENT_GRADE_SUMMARY_CHANGED    | org.openedx.learning.course.persistent_grade.summary.v1   | Emitted when a grade changes in the course                          |
-+-------------------------------------+-----------------------------------------------------------+---------------------------------------------------------------------+
+Open edX Events are a powerful feature that allows developers to listen to key events in the platform and trigger custom actions based on them. This can be useful for a variety of use cases, such as:
 
-These receivers are configured with:
+- Sending welcome emails to new users
+- Logging new enrollments to external CRMs
+- Triggering events like email follow-ups for grade updates
 
-.. code-block::
+By sending key event data to Zapier, Open edX users can leverage the integration ecosystem of Zapier without additional development effort.
 
-    plugin_app = {
-        "settings_config": {
-            ...
-        },
-        "signals_config": {
-            "lms.djangoapp": {
-                "relative_path": "receivers",
-                "receivers": [
-                    {
-                        "receiver_func_name": "send_user_data_to_webhook",
-                        "signal_path": "openedx_events.learning.signals.STUDENT_REGISTRATION_COMPLETED",
-                    },
-                    {
-                        "receiver_func_name": "send_enrollment_data_to_webhook",
-                        "signal_path": "openedx_events.learning.signals.COURSE_ENROLLMENT_CREATED",
-                    },
-                    {
-                        "receiver_func_name": "send_persistent_grade_course_data_to_webhook",
-                        "signal_path": "openedx_events.learning.signals.PERSISTENT_GRADE_SUMMARY_CHANGED",
-                    },
-                ],
-            }
-        },
-    }
+Features
+---------
 
-So they can be used out of the box after installing this plugin. Each receiver, formats the data into the serialized dictionary so it's zappier friendly,
-and then sends it based on the configuration settings.
+- **Event Handlers**: Listen to Open edX Events using Django signals and send data to Zapier.
+- **Webhook Integration**: Send event data to Zapier webhooks for further processing.
+- **Customizable**: Easily extend the repository to handle additional events or integrate with other services.
+- **Ready-to-Use**: Install the package and configure webhooks to start sending events to Zapier.
 
-Checkout `receivers.py <https://github.com/eduNEXT/openedx-events-2-zapier/blob/main/openedx_events_2_zapier/receivers.py>`_ for implementation details.
+Supported Events
+-----------------
 
-For more information, see `Open edX Events`_ and `Hooks framework`_.
++-------------------------------------+------------------------------------------------------------+---------------------------------------------------------------------+
+| **Event Name**                      | **Event Type**                                             | **Description**                                                     |
++=====================================+============================================================+=====================================================================+
+| `STUDENT_REGISTRATION_COMPLETED`_   | org.openedx.learning.student.registration.completed.v1     | Triggered when a user completes registration in the LMS.            |
++-------------------------------------+------------------------------------------------------------+---------------------------------------------------------------------+
+| `COURSE_ENROLLMENT_CREATED`_        | org.openedx.learning.course.enrollment.created.v1          | Triggered upon successful course enrollment.                        |
++-------------------------------------+------------------------------------------------------------+---------------------------------------------------------------------+
+| `PERSISTENT_GRADE_SUMMARY_CHANGED`_`| org.openedx.learning.course.persistent_grade.summary.v1    | Triggered when a persistent grade summary is updated.               |
++-------------------------------------+------------------------------------------------------------+---------------------------------------------------------------------+
+
+How Does it Work?
+-----------------
+
+Each of the above events is handled by Django Signal handlers. When these signals are emitted, they are intercepted by handlers defined in the repository, which transform and forward the event data to a `Zapier webhook`_.
+
+Django Signal Handlers
+~~~~~~~~~~~~~~~~~~~~~~
+
+In the file `handlers.py`_, handlers listen to Django signals using the standard `receiver`_ decorator:
+
+.. code-block:: python
+
+    from django.dispatch import receiver
+    from openedx_events.signals import STUDENT_REGISTRATION_COMPLETED
+
+    @receiver(STUDENT_REGISTRATION_COMPLETED)
+    def send_user_data_to_webhook(signal, sender, user, metadata, **kwargs):
+        zapier_payload = {
+            "user": asdict(user),
+            "event_metadata": asdict(metadata),
+        }
+        requests.post(
+            settings.ZAPIER_REGISTRATION_WEBHOOK,
+            flatten_dict(zapier_payload),
+            timeout=ZAPIER_REQUEST_TIMEOUT,
+        )
+
+- The `receiver` decorator listens to the `STUDENT_REGISTRATION_COMPLETED` signal.
+- The handler function `send_user_data_to_webhook` extracts the user and metadata from the signal.
+- The `ZAPIER_REGISTRATION_WEBHOOK` URL is configured in as a Django settings.
+- The extracted data is formatted into a payload and sent to the Zapier webhook for further processing.
+
+App Configuration (`apps.py`)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The Django app is configured using an `AppConfig` to automatically register handlers on startup.
+
+.. code-block:: python
+
+    class OpenedxEvents2ZapierConfig(AppConfig):
+        name = "openedx_events_2_zapier"
+
+        def ready(self):
+            from openedx_events_2_zapier import handlers
 
 Usage
 -----
 
-After installing the plugin, please modify the following settings in common.py
-or production.py (through env-tokens) with the URL for your own zappier webhook:
+To use this plugin, follow these steps:
 
-.. code-block:: python
+1. Install the plugin in your Open edX image using Tutor's `OPENEDX_EXTRA_PIP_REQUIREMENTS` configuration setting:
 
+.. code-block:: yaml
 
-    ZAPIER_REGISTRATION_WEBHOOK = "https://hooks.zapier.com/hooks/catch/<account>/<webhook>/"
-    ZAPIER_ENROLLMENT_WEBHOOK = "https://hooks.zapier.com/hooks/catch/<account>/<webhook>/"
+    OPENEDX_EXTRA_PIP_REQUIREMENTS:
+    - git+https://github.com/edunext/openedx-events-2-zapier.git@main
 
-Now, you're ready to go.
+2. Launch the Open edX platform to apply the changes:
+
+.. code-block:: bash
+
+     tutor local launch
+
+3. Create and enable an Inline Tutor plugin to configure the Zapier webhooks:
+
+   .. code-block:: python
+
+        # Location plugins/zapier.py
+        from tutor import hooks
+
+        hooks.Filters.ENV_PATCHES.add_item(
+            (
+                "openedx-lms-common-settings",
+        """
+        ZAPIER_REGISTRATION_WEBHOOK = "https://hooks.zapier.com/hooks/catch/<account>/<webhook>/"
+        ZAPIER_ENROLLMENT_WEBHOOK = "https://hooks.zapier.com/hooks/catch/<account>/<webhook>/"
+        ZAPIER_GRADE_WEBHOOK = "https://hooks.zapier.com/hooks/catch/<account>/<webhook>/"
+        """
+            )
+        )
+
+ .. code-block:: bash
+
+      tutor plugins enable zapier
+
+4. Configure Zapier webhooks to receive the event data, follow the instructions available in the Zapier documentation.
+5. Trigger the events by registering a new user, enrolling in a course, or updating a grade in the Open edX platform.
+
+To send event data to other services or APIs, simply configure more webhooks in the Django settings. The handlers are intentionally generic, ensuring they work seamlessly with different kinds of services. You can also add more event handlers to the `handlers.py`_ file to listen to additional events.
+
+How to Extend this Repository
+-----------------------------
+
+This repository is a starting point for Open edX developers:
+
+- You can add new event handlers by following the structure in `handlers.py`_.
+- Custom logic can be implemented to fit your organization's data flow requirements using Zapier, third-party APIs, or internal services.
+
+For details on extending Open edX with Open edX Events, see:
+
+- `Open edX Events Documentation`_
+- `Hooks Extension Framework`_
+
+The openedx-events-2-zapier repository is here to make integrations simple and sustainable, giving developers the tools to create effective Open edX workflows. Use Open edX Events and Zapier to extend the platform's capabilities and unlock new automation possibilities!
 
 Development Workflow
 --------------------
@@ -153,15 +225,21 @@ Please do not report security issues in public. Please email security@edunext.co
 Getting Help
 ------------
 
-This project was written in the context of the `Hooks framework`_ for open edx.
+This project was written in the context of the `Hooks Extension Framework`_ for Epen edX.
 If you need help with it, the best way forward would be throught the Open edX
 community at https://discuss.openedx.org where you can connect with both the
 authors and other users in the community.
 
 
-.. _Hooks framework: https://open-edx-proposals.readthedocs.io/en/latest/oep-0050-hooks-extension-framework.html
+.. _Hooks Extension Framework: https://open-edx-proposals.readthedocs.io/en/latest/oep-0050-hooks-extension-framework.html
 .. _Open edX Events: https://docs.openedx.org/projects/openedx-events/en/latest/
-
+.. _STUDENT_REGISTRATION_COMPLETED: https://docs.openedx.org/projects/openedx-events/en/latest/reference/events.html#openedxevent-org.openedx.learning.student.registration.completed.v1
+.. _COURSE_ENROLLMENT_CREATED: https://docs.openedx.org/projects/openedx-events/en/latest/reference/events.html#openedxevent-org.openedx.learning.course.enrollment.created.v1
+.. _PERSISTENT_GRADE_SUMMARY_CHANGED: https://docs.openedx.org/projects/openedx-events/en/latest/reference/events.html#openedxevent-org.openedx.learning.course.persistent_grade.summary.v1
+.. _handlers.py: openedx_events_2_zapier/handlers.py
+.. _receiver: https://docs.djangoproject.com/en/4.2/topics/signals/#connecting-receiver-functions
+.. _Zapier webhook: https://zapier.com/
+.. _Real-Life Use Cases for Open edX Events: https://docs.openedx.org/projects/openedx-events/en/latest/reference/real-life-use-cases.html
 
 .. |ci-badge| image:: https://github.com/eduNEXT/openedx-events-2-zapier/workflows/Python%20CI/badge.svg?branch=main
     :target: https://github.com/eduNEXT/openedx-events-2-zapier/actions
