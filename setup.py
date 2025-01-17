@@ -97,7 +97,7 @@ setup(
     ],
     entry_points={
         "lms.djangoapp": [
-            "openedx_events_2_zapier = openedx_events_2_zapier.apps:OpenedxEventsSamplesConfig",
+            "openedx_events_2_zapier = openedx_events_2_zapier.apps:OpenedxEvents2Zapier",
         ],
     },
 )
