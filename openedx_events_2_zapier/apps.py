@@ -29,6 +29,4 @@ class OpenedxEvents2Zapier(AppConfig):
 
     def ready(self):
         """Perform initialization tasks required for the plugin."""
-        from openedx_events_2_zapier import (
-            handlers,
-        )  # pylint: disable=unused-import, import-outside-toplevel
+        from openedx_events_2_zapier import handlers  # pylint: disable=unused-import, import-outside-toplevel

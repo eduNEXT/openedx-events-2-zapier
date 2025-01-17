@@ -20,7 +20,9 @@ log = logging.getLogger(__name__)
 
 
 @receiver(STUDENT_REGISTRATION_COMPLETED)
-def send_user_data_to_webhook(signal, sender, user, metadata, **kwargs):
+def send_user_data_to_webhook(
+    signal, sender, user, metadata, **kwargs  # pylint: disable=unused-argument
+):
     """
     POST user's data after STUDENT_REGISTRATION_COMPLETED event is sent.
 
@@ -54,8 +56,8 @@ def send_user_data_to_webhook(signal, sender, user, metadata, **kwargs):
 
 @receiver(COURSE_ENROLLMENT_CREATED)
 def send_enrollment_data_to_webhook(
-    signal, sender, enrollment, metadata, **kwargs
-):  # pylint: disable=unused-argument
+    signal, sender, enrollment, metadata, **kwargs  # pylint: disable=unused-argument
+):
     """
     POST enrollment's data after COURSE_ENROLLMENT_CREATED event is sent.
 
@@ -105,7 +107,7 @@ def send_enrollment_data_to_webhook(
 
 @receiver(PERSISTENT_GRADE_SUMMARY_CHANGED)
 def send_persistent_grade_course_data_to_webhook(
-    signal, sender, grade, metadata, **kwargs
+    signal, sender, grade, metadata, **kwargs  # pylint: disable=unused-argument
 ):
     """
     POST user's data after PERSISTENT_GRADE_SUMMARY_CHANGED event is sent.
