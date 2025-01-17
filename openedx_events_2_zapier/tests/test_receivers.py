@@ -1,8 +1,9 @@
-"""This file contains all test for the receivers.py file.
+"""This file contains all test for the handlers.py file.
 
 Classes:
     EventsToolingTest: Test events tooling.
 """
+
 import datetime
 from unittest.mock import patch
 
@@ -22,7 +23,7 @@ from openedx_events.learning.signals import (
     STUDENT_REGISTRATION_COMPLETED,
 )
 
-from openedx_events_2_zapier.receivers import (
+from openedx_events_2_zapier.handlers import (
     send_enrollment_data_to_webhook,
     send_persistent_grade_course_data_to_webhook,
     send_user_data_to_webhook,
@@ -53,7 +54,7 @@ class RegistrationCompletedReceiverTest(TestCase):
             minorversion=0,
         )
 
-    @patch("openedx_events_2_zapier.receivers.requests")
+    @patch("openedx_events_2_zapier.handlers.requests")
     def test_receiver_called_after_event(self, request_mock):
         """
         Test that send_user_data_to_webhook is called the correct information after sending
@@ -116,7 +117,7 @@ class EnrollmentCreatedReceiverTest(TestCase):
             minorversion=0,
         )
 
-    @patch("openedx_events_2_zapier.receivers.requests")
+    @patch("openedx_events_2_zapier.handlers.requests")
     def test_receiver_called_after_event(self, request_mock):
         """
         Test that send_user_data_to_webhook is called the correct information after sending
@@ -156,8 +157,8 @@ class EnrollmentCreatedReceiverTest(TestCase):
 
 class PersistentGradeEventsTest(TestCase):
     """
-        Test that send_persistent_grade_course_data_to_webhook is called the correct information after sending
-        COURSE_ENROLLMENT_CREATED event.
+    Test that send_persistent_grade_course_data_to_webhook is called the correct information after sending
+    COURSE_ENROLLMENT_CREATED event.
     """
 
     def setUp(self):
@@ -169,21 +170,21 @@ class PersistentGradeEventsTest(TestCase):
             user_id=42,
             course=CourseData(
                 course_key=CourseKey.from_string("course-v1:edX+100+2021"),
-                display_name="Demonstration Course"
+                display_name="Demonstration Course",
             ),
             course_edited_timestamp=datetime.datetime(2021, 9, 21, 17, 40, 27),
             course_version="",
             grading_policy_hash="",
             percent_grade=80,
             letter_grade="Great",
-            passed_timestamp=datetime.datetime(2021, 9, 21, 17, 40, 27)
+            passed_timestamp=datetime.datetime(2021, 9, 21, 17, 40, 27),
         )
         self.metadata = EventsMetadata(
             event_type="org.openedx.learning.course.persistent_grade_summary.changed.v1",
             minorversion=0,
         )
 
-    @patch("openedx_events_2_zapier.receivers.requests")
+    @patch("openedx_events_2_zapier.handlers.requests")
     def test_receiver_called_after_event(self, request_mock):
         """
         Test that send_persistent_grade_course_data_to_webhook is called the correct information after sending
@@ -205,7 +206,9 @@ class PersistentGradeEventsTest(TestCase):
             "event_metadata_sourcehost": self.metadata.sourcehost,
             "event_metadata_sourcelib": list(self.metadata.sourcelib),
         }
-        PERSISTENT_GRADE_SUMMARY_CHANGED.connect(send_persistent_grade_course_data_to_webhook)
+        PERSISTENT_GRADE_SUMMARY_CHANGED.connect(
+            send_persistent_grade_course_data_to_webhook
+        )
 
         PERSISTENT_GRADE_SUMMARY_CHANGED.send_event(
             grade=self.grade,

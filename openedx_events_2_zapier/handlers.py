@@ -1,16 +1,26 @@
 """
 Where handlers for Open edX Events are defined.
 """
+
+import logging
 import requests
 from attr import asdict
 from django.conf import settings
+from django.dispatch import receiver
+from openedx_events.learning.signals import (
+    COURSE_ENROLLMENT_CREATED,
+    PERSISTENT_GRADE_SUMMARY_CHANGED,
+    STUDENT_REGISTRATION_COMPLETED,
+)
 
 from openedx_events_2_zapier.utils import flatten_dict, serialize_course_key
 
 ZAPIER_REQUEST_TIMEOUT = 5
+log = logging.getLogger(__name__)
 
 
-def send_user_data_to_webhook(user, **kwargs):
+@receiver(STUDENT_REGISTRATION_COMPLETED)
+def send_user_data_to_webhook(signal, sender, user, metadata, **kwargs):
     """
     POST user's data after STUDENT_REGISTRATION_COMPLETED event is sent.
 
@@ -31,11 +41,9 @@ def send_user_data_to_webhook(user, **kwargs):
 
     This format is convenient for Zapier to read.
     """
-    user_info = asdict(user)
-    event_metadata = asdict(kwargs.get("metadata"))
     zapier_payload = {
-        "user": user_info,
-        "event_metadata": event_metadata,
+        "user": asdict(user),
+        "event_metadata": asdict(metadata),
     }
     requests.post(
         settings.ZAPIER_REGISTRATION_WEBHOOK,
@@ -44,11 +52,21 @@ def send_user_data_to_webhook(user, **kwargs):
     )
 
 
-def send_enrollment_data_to_webhook(enrollment, **kwargs):
+@receiver(COURSE_ENROLLMENT_CREATED)
+def send_enrollment_data_to_webhook(
+    signal, sender, enrollment, metadata, **kwargs
+):  # pylint: disable=unused-argument
     """
     POST enrollment's data after COURSE_ENROLLMENT_CREATED event is sent.
 
-    The data sent to the webhook is, for example:
+    Arguments:
+        signal: The signal that was sent.
+        sender: The sender of the signal.
+        enrollment: The enrollment data.
+        metadata: The metadata of the event.
+        **kwargs: Additional keyword arguments.
+
+    The data sent to the webhook is would look this:
 
     'enrollment_user_id': 42,
     'enrollment_user_is_active': True,
@@ -73,15 +91,11 @@ def send_enrollment_data_to_webhook(enrollment, **kwargs):
 
     This format is convenient for Zapier to read.
     """
-    enrollment_info = asdict(
-        enrollment,
-        value_serializer=serialize_course_key,
-    )
-    event_metadata = asdict(kwargs.get("metadata"))
     zapier_payload = {
-        "enrollment": enrollment_info,
-        "event_metadata": event_metadata,
+        "enrollment": asdict(enrollment, value_serializer=serialize_course_key),
+        "event_metadata": asdict(metadata),
     }
+
     requests.post(
         settings.ZAPIER_ENROLLMENT_WEBHOOK,
         flatten_dict(zapier_payload),
@@ -89,11 +103,14 @@ def send_enrollment_data_to_webhook(enrollment, **kwargs):
     )
 
 
-def send_persistent_grade_course_data_to_webhook(grade, **kwargs):
+@receiver(PERSISTENT_GRADE_SUMMARY_CHANGED)
+def send_persistent_grade_course_data_to_webhook(
+    signal, sender, grade, metadata, **kwargs
+):
     """
     POST user's data after PERSISTENT_GRADE_SUMMARY_CHANGED event is sent.
 
-    The data sent to the webhook is, for example:
+    The data sent to the webhook would look like this:
 
     'grade_user_id': 42,
     'grade_course_course_key': 'course-v1:edX+100+2021',
@@ -114,15 +131,11 @@ def send_persistent_grade_course_data_to_webhook(grade, **kwargs):
 
     This format is convenient for Zapier to read.
     """
-    grade_info = asdict(
-        grade,
-        value_serializer=serialize_course_key,
-    )
-    event_metadata = asdict(kwargs.get("metadata"))
     zapier_payload = {
-        "grade": grade_info,
-        "event_metadata": event_metadata,
+        "grade": asdict(grade, value_serializer=serialize_course_key),
+        "event_metadata": asdict(metadata),
     }
+
     requests.post(
         settings.ZAPIER_PERSISTENT_GRADE_COURSE_WEBHOOK,
         flatten_dict(zapier_payload),

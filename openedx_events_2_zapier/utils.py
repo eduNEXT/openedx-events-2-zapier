@@ -1,6 +1,7 @@
 """
-Utilities used by Open edX Events Receivers.
+Utilities used by Open edX Events handlers.
 """
+
 from collections.abc import MutableMapping
 
 from opaque_keys.edx.locator import CourseLocator
