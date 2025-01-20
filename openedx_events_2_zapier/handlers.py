@@ -4,7 +4,6 @@ Where handlers for Open edX Events are defined.
 
 import logging
 
-import requests
 from attr import asdict
 from django.conf import settings
 from django.dispatch import receiver
@@ -14,10 +13,8 @@ from openedx_events.learning.signals import (
     STUDENT_REGISTRATION_COMPLETED,
 )
 
-from openedx_events_2_zapier.utils import flatten_dict, serialize_course_key
-
-ZAPIER_REQUEST_TIMEOUT = 5
-log = logging.getLogger(__name__)
+from openedx_events_2_zapier.tasks import send_data_to_zapier
+from openedx_events_2_zapier.utils import serialize_course_key
 
 
 @receiver(STUDENT_REGISTRATION_COMPLETED)
@@ -25,7 +22,10 @@ def send_user_data_to_webhook(
     signal, sender, user, metadata, **kwargs  # pylint: disable=unused-argument
 ):
     """
-    POST user's data after STUDENT_REGISTRATION_COMPLETED event is sent.
+    Trigger a task to send the user data to the Zapier webhook.
+
+    This handler is triggered when the STUDENT_REGISTRATION_COMPLETED event
+    is sent.
 
     Arguments:
         signal: The signal that was sent.
@@ -55,12 +55,7 @@ def send_user_data_to_webhook(
         "user": asdict(user),
         "event_metadata": asdict(metadata),
     }
-    log.info("Sending user data to Zapier: %s", zapier_payload)
-    requests.post(
-        settings.ZAPIER_REGISTRATION_WEBHOOK,
-        flatten_dict(zapier_payload),
-        timeout=ZAPIER_REQUEST_TIMEOUT,
-    )
+    send_data_to_zapier.delay(settings.ZAPIER_REGISTRATION_WEBHOOK, zapier_payload)
 
 
 @receiver(COURSE_ENROLLMENT_CREATED)
@@ -68,7 +63,9 @@ def send_enrollment_data_to_webhook(
     signal, sender, enrollment, metadata, **kwargs  # pylint: disable=unused-argument
 ):
     """
-    POST enrollment's data after COURSE_ENROLLMENT_CREATED event is sent.
+    Trigger a task to send the enrollment data to the Zapier webhook.
+
+    This handler is triggered when the COURSE_ENROLLMENT_CREATED event is sent.
 
     Arguments:
         signal: The signal that was sent.
@@ -106,12 +103,7 @@ def send_enrollment_data_to_webhook(
         "enrollment": asdict(enrollment, value_serializer=serialize_course_key),
         "event_metadata": asdict(metadata),
     }
-    log.info("Sending enrollment data to Zapier: %s", zapier_payload)
-    requests.post(
-        settings.ZAPIER_ENROLLMENT_WEBHOOK,
-        flatten_dict(zapier_payload),
-        timeout=ZAPIER_REQUEST_TIMEOUT,
-    )
+    send_data_to_zapier.delay(settings.ZAPIER_ENROLLMENT_WEBHOOK, zapier_payload)
 
 
 @receiver(PERSISTENT_GRADE_SUMMARY_CHANGED)
@@ -119,7 +111,9 @@ def send_persistent_grade_course_data_to_webhook(
     signal, sender, grade, metadata, **kwargs  # pylint: disable=unused-argument
 ):
     """
-    POST user's data after PERSISTENT_GRADE_SUMMARY_CHANGED event is sent.
+    Trigger a task to send the grade data to the Zapier webhook.
+
+    This handler is triggered when the PERSISTENT_GRADE_SUMMARY_CHANGED event is sent.
 
     Arguments:
         signal: The signal that was sent.
@@ -153,9 +147,6 @@ def send_persistent_grade_course_data_to_webhook(
         "grade": asdict(grade, value_serializer=serialize_course_key),
         "event_metadata": asdict(metadata),
     }
-    log.info("Sending grade data to Zapier: %s", zapier_payload)
-    requests.post(
-        settings.ZAPIER_PERSISTENT_GRADE_COURSE_WEBHOOK,
-        flatten_dict(zapier_payload),
-        timeout=ZAPIER_REQUEST_TIMEOUT,
+    send_data_to_zapier.delay(
+        settings.ZAPIER_PERSISTENT_GRADE_COURSE_WEBHOOK, zapier_payload
     )
