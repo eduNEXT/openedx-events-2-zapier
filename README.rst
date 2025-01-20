@@ -12,7 +12,7 @@ Overview
 
 This repository demonstrates how to connect Open edX registration, enrollment, and grade change events to external tools via Zapier, enabling easier automation workflows through this third-party service.
 
-Open edX Events are a powerful feature that allows developers to listen to key events in the platform and trigger custom actions based on them. This can be useful for a variety of use cases, such as:
+Open edX Events are a powerful feature that allows developers to listen to key events in the Open edX platform and trigger custom actions based on them. This can be useful for a variety of use cases, such as:
 
 - Sending welcome emails to new users
 - Logging new enrollments to external CRMs
@@ -38,7 +38,8 @@ Supported Events
 +-------------------------------------+------------------------------------------------------------+---------------------------------------------------------------------+
 | `COURSE_ENROLLMENT_CREATED`_        | org.openedx.learning.course.enrollment.created.v1          | Triggered upon successful course enrollment.                        |
 +-------------------------------------+------------------------------------------------------------+---------------------------------------------------------------------+
-| `PERSISTENT_GRADE_SUMMARY_CHANGED`_ | org.openedx.learning.course.persistent_grade.summary.v1    | Triggered when a persistent grade summary is updated.               |
+| `PERSISTENT_GRADE_SUMMARY_CHANGED`_ | org.openedx.learning.course.persistent_grade.summary.v1    | Triggered when a persistent grade summary is updated. This happens  |
+|                                     |                                                            | when a grade changes in a course.                                   |
 +-------------------------------------+------------------------------------------------------------+---------------------------------------------------------------------+
 
 How Does it Work?
