@@ -18,8 +18,28 @@ Open edX Events are a powerful feature that allows developers to listen to key e
 
 By sending key event data to Zapier, Open edX users can leverage the integration ecosystem of Zapier without additional development effort.
 
+Getting Started with Development
+********************************
+
+Please see the Open edX documentation for `guidance on Python development`_ in this repo.
+
+.. _guidance on Python development: https://docs.openedx.org/en/latest/developers/how-tos/get-ready-for-python-dev.html
+
+Deploying
+*********
+
+See the Usage section below for instructions on how to deploy this plugin. Also, see the `Tutor documentation`_ for more information on deploying extra requirements.
+
+Getting Help
+************
+
+Documentation
+=============
+
+Refer to the `Open edX Events documentation`_ to learn about implementing and working with events. This documentation details how to use the repository to integrate with third-party services, such as Zapier Webhooks, through events.
+
 Features
----------
+--------
 
 - **Event Handlers**: Listen to Open edX Events using Django signals and send data to Zapier.
 - **Webhook Integration**: Send event data to Zapier webhooks for further processing.
@@ -27,7 +47,7 @@ Features
 - **Ready-to-Use**: Install the package and configure webhooks to start sending events to Zapier.
 
 Supported Events
------------------
+----------------
 
 +-------------------------------------+------------------------------------------------------------+---------------------------------------------------------------------+
 | **Event Name**                      | **Event Type**                                             | **Description**                                                     |
@@ -46,7 +66,7 @@ How Does it Work?
 Each of the above events is handled by Django Signal handlers. When these signals are emitted, they are intercepted by handlers defined in the repository, which transform and forward the event data to a `Zapier webhook`_.
 
 Django Signal Handlers
-~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
 
 In the file `handlers.py`_, handlers listen to Django signals using the standard `receiver`_ decorator:
 
@@ -73,7 +93,7 @@ In the file `handlers.py`_, handlers listen to Django signals using the standard
 - The extracted data is formatted into a payload and sent to the Zapier webhook for further processing.
 
 App Configuration (`apps.py`)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The Django app is configured using an `AppConfig` to automatically register handlers on startup.
 
@@ -138,36 +158,12 @@ This repository is a starting point for Open edX developers:
 - You can add new event handlers by following the structure in `handlers.py`_.
 - Custom logic can be implemented to fit your organization's data flow requirements using Zapier, third-party APIs, or internal services.
 
-For details on extending Open edX with Open edX Events, see:
+For details on extending Open edX with Open edX Events, see also:
 
 - `Open edX Events Documentation`_
 - `Hooks Extension Framework`_
 
 The openedx-events-2-zapier repository is here to make integrations simple and sustainable, giving developers the tools to create effective Open edX workflows with external services like Zapier.
-
-Getting Started with Development
-********************************
-
-Please see the Open edX documentation for `guidance on Python development`_ in this repo.
-
-.. _guidance on Python development: https://docs.openedx.org/en/latest/developers/how-tos/get-ready-for-python-dev.html
-
-Deploying
-*********
-
-See the Usage section above for instructions on how to deploy this plugin. Also, see the `Tutor documentation`_ for more information on deploying extra requirements.
-
-Getting Help
-************
-
-Documentation
-=============
-
-PLACEHOLDER: Start by going through `the documentation`_.  If you need more help see below.
-
-.. _the documentation: https://docs.openedx.org/projects/openedx-events-samples
-
-(TODO: `Set up documentation <https://openedx.atlassian.net/wiki/spaces/DOC/pages/21627535/Publish+Documentation+on+Read+the+Docs>`_)
 
 More Help
 =========
