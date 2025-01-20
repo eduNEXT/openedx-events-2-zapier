@@ -3,7 +3,7 @@ openedx-events-2-zapier
 
 |ci-badge| |license-badge|
 
-A ready-to-use repository demonstrating how to use Open edX Events for building workflows and automating integrations. It serves as a starting point for more advanced use cases. Explore Real-Life Use Cases for Open edX Events to see more complex implementations from the Open edX Community
+A ready-to-use repository demonstrating how to use Open edX Events for building workflows and automating integrations. It serves as a starting point for more advanced use cases. Explore `Real-Life Use Cases for Open edX Events`_ to see more complex implementations from the Open edX Community
 
 This repository is currently being maintained by the eduNEXT team.
 
@@ -38,7 +38,7 @@ Supported Events
 +-------------------------------------+------------------------------------------------------------+---------------------------------------------------------------------+
 | `COURSE_ENROLLMENT_CREATED`_        | org.openedx.learning.course.enrollment.created.v1          | Triggered upon successful course enrollment.                        |
 +-------------------------------------+------------------------------------------------------------+---------------------------------------------------------------------+
-| `PERSISTENT_GRADE_SUMMARY_CHANGED`_`| org.openedx.learning.course.persistent_grade.summary.v1    | Triggered when a persistent grade summary is updated.               |
+| `PERSISTENT_GRADE_SUMMARY_CHANGED`_ | org.openedx.learning.course.persistent_grade.summary.v1    | Triggered when a persistent grade summary is updated.               |
 +-------------------------------------+------------------------------------------------------------+---------------------------------------------------------------------+
 
 How Does it Work?
@@ -68,9 +68,9 @@ In the file `handlers.py`_, handlers listen to Django signals using the standard
             timeout=ZAPIER_REQUEST_TIMEOUT,
         )
 
-- The `receiver` decorator listens to the `STUDENT_REGISTRATION_COMPLETED` signal.
-- The handler function `send_user_data_to_webhook` extracts the user and metadata from the signal.
-- The `ZAPIER_REGISTRATION_WEBHOOK` URL is configured in as a Django settings.
+- The ``receiver`` decorator listens to the ``STUDENT_REGISTRATION_COMPLETED`` signal.
+- The handler function ``send_user_data_to_webhook`` extracts the user and metadata from the signal.
+- The ``ZAPIER_REGISTRATION_WEBHOOK`` URL is configured as a Django settings by using a `Tutor plugin`_.
 - The extracted data is formatted into a payload and sent to the Zapier webhook for further processing.
 
 App Configuration (`apps.py`)
@@ -232,7 +232,7 @@ authors and other users in the community.
 
 
 .. _Hooks Extension Framework: https://open-edx-proposals.readthedocs.io/en/latest/oep-0050-hooks-extension-framework.html
-.. _Open edX Events: https://docs.openedx.org/projects/openedx-events/en/latest/
+.. _Open edX Events Documentation: https://docs.openedx.org/projects/openedx-events/en/latest/
 .. _STUDENT_REGISTRATION_COMPLETED: https://docs.openedx.org/projects/openedx-events/en/latest/reference/events.html#openedxevent-org.openedx.learning.student.registration.completed.v1
 .. _COURSE_ENROLLMENT_CREATED: https://docs.openedx.org/projects/openedx-events/en/latest/reference/events.html#openedxevent-org.openedx.learning.course.enrollment.created.v1
 .. _PERSISTENT_GRADE_SUMMARY_CHANGED: https://docs.openedx.org/projects/openedx-events/en/latest/reference/events.html#openedxevent-org.openedx.learning.course.persistent_grade.summary.v1
@@ -240,6 +240,7 @@ authors and other users in the community.
 .. _receiver: https://docs.djangoproject.com/en/4.2/topics/signals/#connecting-receiver-functions
 .. _Zapier webhook: https://zapier.com/
 .. _Real-Life Use Cases for Open edX Events: https://docs.openedx.org/projects/openedx-events/en/latest/reference/real-life-use-cases.html
+.. _Tutor plugin: https://docs.tutor.edly.io/plugins/intro.html#plugins
 
 .. |ci-badge| image:: https://github.com/eduNEXT/openedx-events-2-zapier/workflows/Python%20CI/badge.svg?branch=main
     :target: https://github.com/eduNEXT/openedx-events-2-zapier/actions
