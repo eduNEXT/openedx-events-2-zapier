@@ -46,5 +46,5 @@ urllib3==2.2.3
     # via
     #   -c https://raw.githubusercontent.com/openedx/edx-lint/master/edx_lint/files/common_constraints.txt
     #   requests
-virtualenv==20.29.0
+virtualenv==20.29.1
     # via tox
