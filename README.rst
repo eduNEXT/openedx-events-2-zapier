@@ -1,14 +1,12 @@
-openedx-events-2-zapier
-=============================
+Open edX Events 2 Zapier
+########################
 
 |ci-badge| |license-badge|
 
 A ready-to-use repository demonstrating how to use Open edX Events for building workflows and automating integrations. It serves as a starting point for more advanced use cases. Explore `Real-Life Use Cases for Open edX Events`_ to see more complex implementations from the Open edX Community
 
-This repository is currently being maintained by the eduNEXT team.
-
-Overview
----------
+Purpose
+********
 
 This repository demonstrates how to connect Open edX registration, enrollment, and grade change events to external tools via Zapier, enabling easier automation workflows through this third-party service.
 
@@ -97,7 +95,7 @@ To use this plugin, follow these steps:
 .. code-block:: yaml
 
     OPENEDX_EXTRA_PIP_REQUIREMENTS:
-    - git+https://github.com/edunext/openedx-events-2-zapier.git@main
+    - git+https://github.com/edunext/openedx-events-2-zapier.git@X.Y.Z
 
 2. Launch the Open edX platform to apply the changes:
 
@@ -123,9 +121,9 @@ To use this plugin, follow these steps:
             )
         )
 
- .. code-block:: bash
+   .. code-block:: bash
 
-      tutor plugins enable zapier
+        tutor plugins enable zapier
 
 4. Configure Zapier webhooks to receive the event data, follow the instructions available in the Zapier documentation.
 5. Trigger the events by registering a new user, enrolling in a course, or updating a grade in the Open edX platform.
@@ -147,89 +145,88 @@ For details on extending Open edX with Open edX Events, see:
 
 The openedx-events-2-zapier repository is here to make integrations simple and sustainable, giving developers the tools to create effective Open edX workflows with external services like Zapier.
 
-Development Workflow
---------------------
+Getting Started with Development
+********************************
 
-One Time Setup
-~~~~~~~~~~~~~~
-.. code-block::
+Please see the Open edX documentation for `guidance on Python development`_ in this repo.
 
-  # Clone the repository
-  git clone git@github.com:edx/openedx-events-2-zapier.git
-  cd openedx-events-2-zapier
+.. _guidance on Python development: https://docs.openedx.org/en/latest/developers/how-tos/get-ready-for-python-dev.html
 
-  # Set up a virtualenv using virtualenvwrapper with the same name as the repo and activate it
-  mkvirtualenv -p python3.8 openedx-events-2-zapier
+Deploying
+*********
 
+See the Usage section above for instructions on how to deploy this plugin. Also, see the `Tutor documentation`_ for more information on deploying extra requirements.
 
-Every time you develop something in this repo
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-.. code-block::
+Getting Help
+************
 
-  # Activate the virtualenv
-  workon openedx-events-2-zapier
+Documentation
+=============
 
-  # Grab the latest code
-  git checkout master
-  git pull
+PLACEHOLDER: Start by going through `the documentation`_.  If you need more help see below.
 
-  # Install/update the dev requirements
-  make requirements
+.. _the documentation: https://docs.openedx.org/projects/openedx-events-samples
 
-  # Run the tests and quality checks (to verify the status before you make any changes)
-  make validate
+(TODO: `Set up documentation <https://openedx.atlassian.net/wiki/spaces/DOC/pages/21627535/Publish+Documentation+on+Read+the+Docs>`_)
 
-  # Make a new branch for your changes
-  git checkout -b <your_github_username>/<short_description>
+More Help
+=========
 
-  # Using your favorite editor, edit the code to make your change.
-  vim …
+If you're having trouble, we have discussion forums at
+https://discuss.openedx.org where you can connect with others in the
+community.
 
-  # Run your new tests
-  pytest ./path/to/new/tests
+Our real-time conversations are on Slack. You can request a `Slack
+invitation`_, then join our `community Slack workspace`_.
 
-  # Run all the tests and quality checks
-  make validate
+For anything non-trivial, the best path is to open an issue in this
+repository with as many details about the issue you are facing as you
+can provide.
 
-  # Commit all your changes
-  git commit …
-  git push
+https://github.com/openedx/openedx-events-samples/issues
 
-  # Open a PR and ask for review.
+For more information about these options, see the `Getting Help <https://openedx.org/getting-help>`__ page.
+
+.. _Slack invitation: https://openedx.org/slack
+.. _community Slack workspace: https://openedx.slack.com/
 
 License
--------
+*******
 
 The code in this repository is licensed under the AGPL 3.0 unless
 otherwise noted.
 
 Please see `LICENSE.txt <LICENSE.txt>`_ for details.
 
-How To Contribute
------------------
+Contributing
+************
 
 Contributions are very welcome.
+Please read `How To Contribute <https://openedx.org/r/how-to-contribute>`_ for details.
 
-The pull request description template should be automatically applied if you are
-creating a pull request from GitHub. Otherwise you can find it at
-`PULL_REQUEST_TEMPLATE.md <.github/PULL_REQUEST_TEMPLATE.md>`_.
+This project is currently accepting all types of contributions, bug fixes,
+security fixes, maintenance work, or new features.  However, please make sure
+to discuss your new feature idea with the maintainers before beginning development
+to maximize the chances of your change being accepted.
+You can start a conversation by creating a new issue on this repo summarizing
+your idea.
 
-The issue report template should be automatically applied if you are creating
-an issue on GitHub as well. Otherwise you can find it at
-`ISSUE_TEMPLATE.md <.github/ISSUE_TEMPLATE.md>`_.
+The Open edX Code of Conduct
+****************************
+
+All community members are expected to follow the `Open edX Code of Conduct`_.
+
+.. _Open edX Code of Conduct: https://openedx.org/code-of-conduct/
+
+People
+******
+
+This repository is currently being maintained by the eduNEXT team. See the CODEOWNERS file for details.
 
 Reporting Security Issues
--------------------------
+*************************
 
 Please do not report security issues in public. Please email security@edunext.co.
-
-Getting Help
-------------
-
-This project was written in the context of the `Hooks Extension Framework`_ for Epen edX.
-If you need help with it, the best way forward would be throught the Open edX
-community at https://discuss.openedx.org where you can connect with both the
-authors and other users in the community.
 
 
 .. _Hooks Extension Framework: https://open-edx-proposals.readthedocs.io/en/latest/oep-0050-hooks-extension-framework.html
