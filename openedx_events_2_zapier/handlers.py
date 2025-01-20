@@ -3,6 +3,7 @@ Where handlers for Open edX Events are defined.
 """
 
 import logging
+
 import requests
 from attr import asdict
 from django.conf import settings
@@ -47,6 +48,7 @@ def send_user_data_to_webhook(
         "user": asdict(user),
         "event_metadata": asdict(metadata),
     }
+    log.info("Sending user data to Zapier: %s", zapier_payload)
     requests.post(
         settings.ZAPIER_REGISTRATION_WEBHOOK,
         flatten_dict(zapier_payload),
@@ -97,7 +99,7 @@ def send_enrollment_data_to_webhook(
         "enrollment": asdict(enrollment, value_serializer=serialize_course_key),
         "event_metadata": asdict(metadata),
     }
-
+    log.info("Sending enrollment data to Zapier: %s", zapier_payload)
     requests.post(
         settings.ZAPIER_ENROLLMENT_WEBHOOK,
         flatten_dict(zapier_payload),
@@ -137,7 +139,7 @@ def send_persistent_grade_course_data_to_webhook(
         "grade": asdict(grade, value_serializer=serialize_course_key),
         "event_metadata": asdict(metadata),
     }
-
+    log.info("Sending grade data to Zapier: %s", zapier_payload)
     requests.post(
         settings.ZAPIER_PERSISTENT_GRADE_COURSE_WEBHOOK,
         flatten_dict(zapier_payload),
