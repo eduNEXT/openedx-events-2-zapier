@@ -1,3 +1,4 @@
+"""Celery tasks for sending data to Zapier or another webhook."""
 import logging
 
 from celery import shared_task
@@ -16,6 +17,7 @@ def send_data_to_zapier(self, zap_url, data):
     Send data to Zapier using a webhook.
 
     Arguments:
+        self: The task instance.
         zap_url: The URL of the Zapier webhook.
         data: The data to send to the webhook.
     """

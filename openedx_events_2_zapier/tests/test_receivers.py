@@ -1,6 +1,6 @@
 """This file contains all test for the handlers.py file."""
 
-from datetime import datetime, timezone
+from datetime import datetime
 from unittest.mock import patch
 
 from attr import asdict

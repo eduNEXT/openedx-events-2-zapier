@@ -3,7 +3,6 @@
 from datetime import datetime, timezone
 from unittest.mock import patch
 
-import requests
 from attr import asdict
 from ddt import data, ddt, unpack
 from django.test import TestCase
@@ -194,7 +193,7 @@ class SendDataToZapierTaskTest(TestCase):
     @unpack
     @patch("openedx_events_2_zapier.tasks.post")
     def test_send_data_to_zapier_task_success(
-        self, zap_url, data, expected_payload, post_mock
+        self, zap_url, payload, expected_payload, post_mock
     ):
         """
         Test that send_data_to_zapier is making the correct request to Zapier.
@@ -202,7 +201,7 @@ class SendDataToZapierTaskTest(TestCase):
         Expected Behavior:
             - The request.post method is called with the correct arguments.
         """
-        send_data_to_zapier(zap_url, data)
+        send_data_to_zapier(zap_url, payload)  # pylint: disable=no-value-for-parameter
 
         self.assertDictContainsSubset(
             expected_payload,
@@ -224,7 +223,7 @@ class SendDataToZapierTaskTest(TestCase):
         post_mock.side_effect = RequestException
 
         with self.assertRaises(RequestException):
-            send_data_to_zapier("https://webhook.site", {})
+            send_data_to_zapier("https://webhook.site", {})  # pylint: disable=no-value-for-parameter
 
         post_mock.assert_called_once()
         self.assertEqual(
