@@ -144,7 +144,7 @@ For details on extending Open edX with Open edX Events, see:
 - `Open edX Events Documentation`_
 - `Hooks Extension Framework`_
 
-The openedx-events-2-zapier repository is here to make integrations simple and sustainable, giving developers the tools to create effective Open edX workflows. Use Open edX Events and Zapier to extend the platform's capabilities and unlock new automation possibilities!
+The openedx-events-2-zapier repository is here to make integrations simple and sustainable, giving developers the tools to create effective Open edX workflows with external services like Zapier.
 
 Development Workflow
 --------------------
