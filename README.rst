@@ -92,10 +92,10 @@ In the file `handlers.py`_, handlers listen to Django signals using the standard
 - The ``ZAPIER_REGISTRATION_WEBHOOK`` URL is configured as a Django settings by using a `Tutor plugin`_.
 - The extracted data is formatted into a payload and sent to the Zapier webhook for further processing.
 
-App Configuration (`apps.py`)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+App Configuration (``apps.py``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The Django app is configured using an `AppConfig` to automatically register handlers on startup.
+The Django app is configured using an ``AppConfig`` to automatically register handlers on startup.
 
 .. code-block:: python
 
@@ -110,7 +110,7 @@ Usage
 
 To use this plugin, follow these steps:
 
-1. Install the plugin in your Open edX image using Tutor's `OPENEDX_EXTRA_PIP_REQUIREMENTS` configuration setting:
+1. Install the plugin in your Open edX image using Tutor's ``OPENEDX_EXTRA_PIP_REQUIREMENTS`` configuration setting:
 
 .. code-block:: yaml
 
@@ -125,25 +125,25 @@ To use this plugin, follow these steps:
 
 3. Create and enable an Inline Tutor plugin to configure the Zapier webhooks:
 
-   .. code-block:: python
+.. code-block:: python
 
-        # Location plugins/zapier.py
-        from tutor import hooks
+     # Location plugins/zapier.py
+     from tutor import hooks
 
-        hooks.Filters.ENV_PATCHES.add_item(
-            (
-                "openedx-lms-common-settings",
-        """
-        ZAPIER_REGISTRATION_WEBHOOK = "https://hooks.zapier.com/hooks/catch/<account>/<webhook>/"
-        ZAPIER_ENROLLMENT_WEBHOOK = "https://hooks.zapier.com/hooks/catch/<account>/<webhook>/"
-        ZAPIER_GRADE_WEBHOOK = "https://hooks.zapier.com/hooks/catch/<account>/<webhook>/"
-        """
-            )
-        )
+     hooks.Filters.ENV_PATCHES.add_item(
+         (
+             "openedx-lms-common-settings",
+     """
+     ZAPIER_REGISTRATION_WEBHOOK = "https://hooks.zapier.com/hooks/catch/<account>/<webhook>/"
+     ZAPIER_ENROLLMENT_WEBHOOK = "https://hooks.zapier.com/hooks/catch/<account>/<webhook>/"
+     ZAPIER_GRADE_WEBHOOK = "https://hooks.zapier.com/hooks/catch/<account>/<webhook>/"
+     """
+         )
+     )
 
-   .. code-block:: bash
+.. code-block:: bash
 
-        tutor plugins enable zapier
+     tutor plugins enable zapier
 
 4. Configure Zapier webhooks to receive the event data, follow the instructions available in the Zapier documentation.
 5. Trigger the events by registering a new user, enrolling in a course, or updating a grade in the Open edX platform.
@@ -179,7 +179,7 @@ For anything non-trivial, the best path is to open an issue in this
 repository with as many details about the issue you are facing as you
 can provide.
 
-https://github.com/openedx/openedx-events-samples/issues
+https://github.com/openedx/openedx-events-2-zapier/issues
 
 For more information about these options, see the `Getting Help <https://openedx.org/getting-help>`__ page.
 
@@ -217,7 +217,7 @@ All community members are expected to follow the `Open edX Code of Conduct`_.
 People
 ******
 
-This repository is currently being maintained by the eduNEXT team. See the CODEOWNERS file for details.
+This repository is currently being maintained by the eduNEXT team. See the `CODEOWNERS <.github/CODEOWNERS>`_ file for details.
 
 Reporting Security Issues
 *************************
@@ -235,6 +235,7 @@ Please do not report security issues in public. Please email security@edunext.co
 .. _Zapier webhook: https://zapier.com/
 .. _Real-Life Use Cases for Open edX Events: https://docs.openedx.org/projects/openedx-events/en/latest/reference/real-life-use-cases.html
 .. _Tutor plugin: https://docs.tutor.edly.io/plugins/intro.html#plugins
+.. _Tutor documentation: https://docs.tutor.edly.io/
 
 .. |ci-badge| image:: https://github.com/eduNEXT/openedx-events-2-zapier/workflows/Python%20CI/badge.svg?branch=main
     :target: https://github.com/eduNEXT/openedx-events-2-zapier/actions
