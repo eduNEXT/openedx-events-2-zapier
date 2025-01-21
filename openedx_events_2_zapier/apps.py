@@ -5,7 +5,7 @@ openedx_events_2_zapier Django application initialization.
 from django.apps import AppConfig
 
 
-class OpenedxEvents2Zapier(AppConfig):
+class OpenedxEvents2ZapierConfig(AppConfig):
     """
     Configuration for the openedx_events_2_zapier Django application.
     """
