@@ -160,7 +160,7 @@ class EnrollmentCreatedReceiverTest(TestCase):
 class PersistentGradeEventsTest(TestCase):
     """
     Test that send_persistent_grade_course_data_to_webhook is called the correct information after sending
-    COURSE_ENROLLMENT_CREATED event.
+    PERSISTENT_GRADE_SUMMARY_CHANGED event.
     """
 
     def setUp(self):
@@ -191,7 +191,7 @@ class PersistentGradeEventsTest(TestCase):
     def test_receiver_called_after_event(self, task_mock):
         """
         Test that send_persistent_grade_course_data_to_webhook is called the correct information after sending
-        COURSE_ENROLLMENT_CREATED event.
+        PERSISTENT_GRADE_SUMMARY_CHANGED event.
 
         Expected Behavior:
             - The task is called with the correct URL and payload.
