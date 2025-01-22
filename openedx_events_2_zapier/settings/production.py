@@ -14,6 +14,9 @@ def plugin_settings(settings):
     settings.ZAPIER_ENROLLMENT_WEBHOOK = getattr(settings, "ENV_TOKENS", {}).get(
         "ZAPIER_ENROLLMENT_WEBHOOK", settings.ZAPIER_ENROLLMENT_WEBHOOK
     )
-    settings.ZAPIER_PERSISTENT_GRADE_COURSE_WEBHOOK = getattr(settings, "ENV_TOKENS", {}).get(
-        "ZAPIER_PERSISTENT_GRADE_COURSE_WEBHOOK", settings.ZAPIER_PERSISTENT_GRADE_COURSE_WEBHOOK
+    settings.ZAPIER_PERSISTENT_GRADE_COURSE_WEBHOOK = getattr(
+        settings, "ENV_TOKENS", {}
+    ).get(
+        "ZAPIER_PERSISTENT_GRADE_COURSE_WEBHOOK",
+        settings.ZAPIER_PERSISTENT_GRADE_COURSE_WEBHOOK,
     )
