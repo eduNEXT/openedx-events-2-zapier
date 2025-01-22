@@ -18,7 +18,7 @@ log = logging.getLogger(__name__)
     retry_backoff=True,
     retry_kwargs={"max_retries": ZAPIER_RETRY_COUNTDOWN},
 )
-def send_data_to_zapier(self, zap_url, data):
+def send_data_to_zapier(self, zap_url, data):  # pylint: disable=unused-argument
     """
     Send data to Zapier using a webhook.
 

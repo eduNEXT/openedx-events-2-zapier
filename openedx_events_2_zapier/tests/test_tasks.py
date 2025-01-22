@@ -223,9 +223,9 @@ class SendDataToZapierTaskTest(TestCase):
         post_mock.side_effect = RequestException
 
         with self.assertRaises(RequestException):
-            send_data_to_zapier(
+            send_data_to_zapier(  # pylint: disable=no-value-for-parameter
                 "https://webhook.site", {}
-            )  # pylint: disable=no-value-for-parameter
+            )
 
         post_mock.assert_called_once()
         self.assertEqual(
