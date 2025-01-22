@@ -1,6 +1,7 @@
 """
 Where handlers for Open edX Events are defined.
 """
+
 from attr import asdict
 from django.conf import settings
 from django.dispatch import receiver

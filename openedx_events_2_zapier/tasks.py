@@ -1,4 +1,5 @@
 """Celery tasks for sending data to Zapier or another webhook."""
+
 import logging
 
 from celery import shared_task
@@ -11,7 +12,12 @@ ZAPIER_RETRY_COUNTDOWN = 3
 log = logging.getLogger(__name__)
 
 
-@shared_task(bind=True)
+@shared_task(
+    bind=True,
+    autoretry_for=(exceptions.RequestException,),
+    retry_backoff=True,
+    retry_kwargs={"max_retries": ZAPIER_RETRY_COUNTDOWN},
+)
 def send_data_to_zapier(self, zap_url, data):
     """
     Send data to Zapier using a webhook.
@@ -27,4 +33,4 @@ def send_data_to_zapier(self, zap_url, data):
         post(zap_url, flattened_data, timeout=ZAPIER_REQUEST_TIMEOUT)
     except exceptions.RequestException as e:
         log.error("Error sending data to Zapier: %s", e)
-        raise self.retry(exc=e, countdown=ZAPIER_RETRY_COUNTDOWN)
+        raise
