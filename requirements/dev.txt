@@ -4,6 +4,10 @@
 #
 #    make upgrade
 #
+amqp==5.3.1
+    # via
+    #   -r requirements/quality.txt
+    #   kombu
 asgiref==3.8.1
     # via
     #   -r requirements/quality.txt
@@ -21,6 +25,10 @@ backports-tarfile==1.2.0
     # via
     #   -r requirements/quality.txt
     #   jaraco-context
+billiard==4.2.1
+    # via
+    #   -r requirements/quality.txt
+    #   celery
 build==1.2.2.post1
     # via
     #   -r requirements/pip-tools.txt
@@ -29,6 +37,8 @@ cachetools==5.5.0
     # via
     #   -r requirements/ci.txt
     #   tox
+celery==5.4.0
+    # via -r requirements/quality.txt
 certifi==2024.12.14
     # via
     #   -r requirements/ci.txt
@@ -53,15 +63,31 @@ click==8.1.8
     # via
     #   -r requirements/pip-tools.txt
     #   -r requirements/quality.txt
+    #   celery
+    #   click-didyoumean
     #   click-log
+    #   click-plugins
+    #   click-repl
     #   code-annotations
     #   edx-django-utils
     #   edx-lint
     #   pip-tools
+click-didyoumean==0.3.1
+    # via
+    #   -r requirements/quality.txt
+    #   celery
 click-log==0.4.0
     # via
     #   -r requirements/quality.txt
     #   edx-lint
+click-plugins==1.1.1
+    # via
+    #   -r requirements/quality.txt
+    #   celery
+click-repl==0.3.0
+    # via
+    #   -r requirements/quality.txt
+    #   celery
 code-annotations==2.2.0
     # via
     #   -r requirements/quality.txt
@@ -82,6 +108,8 @@ cryptography==44.0.0
     # via
     #   -r requirements/quality.txt
     #   secretstorage
+ddt==1.7.2
+    # via -r requirements/quality.txt
 diff-cover==9.2.1
     # via -r requirements/dev.in
 dill==0.3.9
@@ -186,6 +214,10 @@ keyring==25.6.0
     # via
     #   -r requirements/quality.txt
     #   twine
+kombu==5.4.2
+    # via
+    #   -r requirements/quality.txt
+    #   celery
 lxml[html-clean,html_clean]==5.3.0
     # via
     #   edx-i18n-tools
@@ -261,6 +293,10 @@ pluggy==1.5.0
     #   tox
 polib==1.2.0
     # via edx-i18n-tools
+prompt-toolkit==3.0.49
+    # via
+    #   -r requirements/quality.txt
+    #   click-repl
 psutil==6.1.1
     # via
     #   -r requirements/quality.txt
@@ -325,6 +361,10 @@ pytest-cov==6.0.0
     # via -r requirements/quality.txt
 pytest-django==4.9.0
     # via -r requirements/quality.txt
+python-dateutil==2.9.0.post0
+    # via
+    #   -r requirements/quality.txt
+    #   celery
 python-slugify==8.0.4
     # via
     #   -r requirements/quality.txt
@@ -366,6 +406,7 @@ six==1.17.0
     #   -r requirements/quality.txt
     #   edx-ccx-keys
     #   edx-lint
+    #   python-dateutil
 snowballstemmer==2.2.0
     # via
     #   -r requirements/quality.txt
@@ -396,6 +437,11 @@ typing-extensions==4.12.2
     # via
     #   -r requirements/quality.txt
     #   edx-opaque-keys
+tzdata==2024.2
+    # via
+    #   -r requirements/quality.txt
+    #   celery
+    #   kombu
 urllib3==2.2.3
     # via
     #   -c https://raw.githubusercontent.com/openedx/edx-lint/master/edx_lint/files/common_constraints.txt
@@ -403,10 +449,20 @@ urllib3==2.2.3
     #   -r requirements/quality.txt
     #   requests
     #   twine
+vine==5.1.0
+    # via
+    #   -r requirements/quality.txt
+    #   amqp
+    #   celery
+    #   kombu
 virtualenv==20.29.1
     # via
     #   -r requirements/ci.txt
     #   tox
+wcwidth==0.2.13
+    # via
+    #   -r requirements/quality.txt
+    #   prompt-toolkit
 wheel==0.45.1
     # via
     #   -r requirements/pip-tools.txt

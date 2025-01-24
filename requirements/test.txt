@@ -4,6 +4,10 @@
 #
 #    make upgrade
 #
+amqp==5.3.1
+    # via
+    #   -r requirements/base.txt
+    #   kombu
 asgiref==3.8.1
     # via
     #   -r requirements/base.txt
@@ -12,6 +16,12 @@ attrs==24.3.0
     # via
     #   -r requirements/base.txt
     #   openedx-events
+billiard==4.2.1
+    # via
+    #   -r requirements/base.txt
+    #   celery
+celery==5.4.0
+    # via -r requirements/base.txt
 certifi==2024.12.14
     # via
     #   -r requirements/base.txt
@@ -27,12 +37,30 @@ charset-normalizer==3.4.1
 click==8.1.8
     # via
     #   -r requirements/base.txt
+    #   celery
+    #   click-didyoumean
+    #   click-plugins
+    #   click-repl
     #   code-annotations
     #   edx-django-utils
+click-didyoumean==0.3.1
+    # via
+    #   -r requirements/base.txt
+    #   celery
+click-plugins==1.1.1
+    # via
+    #   -r requirements/base.txt
+    #   celery
+click-repl==0.3.0
+    # via
+    #   -r requirements/base.txt
+    #   celery
 code-annotations==2.2.0
     # via -r requirements/test.in
 coverage[toml]==7.6.10
     # via pytest-cov
+ddt==1.7.2
+    # via -r requirements/test.in
     # via
     #   -c https://raw.githubusercontent.com/openedx/edx-lint/master/edx_lint/files/common_constraints.txt
     #   -r requirements/base.txt
@@ -77,6 +105,10 @@ iniconfig==2.0.0
     # via pytest
 jinja2==3.1.5
     # via code-annotations
+kombu==5.4.2
+    # via
+    #   -r requirements/base.txt
+    #   celery
 markupsafe==3.0.2
     # via jinja2
 newrelic==10.4.0
@@ -93,6 +125,10 @@ pbr==6.1.0
     #   stevedore
 pluggy==1.5.0
     # via pytest
+prompt-toolkit==3.0.49
+    # via
+    #   -r requirements/base.txt
+    #   click-repl
 psutil==6.1.1
     # via
     #   -r requirements/base.txt
@@ -117,6 +153,10 @@ pytest-cov==6.0.0
     # via -r requirements/test.in
 pytest-django==4.9.0
     # via -r requirements/test.in
+python-dateutil==2.9.0.post0
+    # via
+    #   -r requirements/base.txt
+    #   celery
 python-slugify==8.0.4
     # via code-annotations
 pyyaml==6.0.2
@@ -127,6 +167,7 @@ six==1.17.0
     # via
     #   -r requirements/base.txt
     #   edx-ccx-keys
+    #   python-dateutil
 sqlparse==0.5.3
     # via
     #   -r requirements/base.txt
@@ -143,8 +184,23 @@ typing-extensions==4.12.2
     # via
     #   -r requirements/base.txt
     #   edx-opaque-keys
+tzdata==2024.2
+    # via
+    #   -r requirements/base.txt
+    #   celery
+    #   kombu
 urllib3==2.2.3
     # via
     #   -c https://raw.githubusercontent.com/openedx/edx-lint/master/edx_lint/files/common_constraints.txt
     #   -r requirements/base.txt
     #   requests
+vine==5.1.0
+    # via
+    #   -r requirements/base.txt
+    #   amqp
+    #   celery
+    #   kombu
+wcwidth==0.2.13
+    # via
+    #   -r requirements/base.txt
+    #   prompt-toolkit
