@@ -12,7 +12,7 @@ asgiref==3.8.1
     # via
     #   -r requirements/base.txt
     #   django
-attrs==24.3.0
+attrs==25.1.0
     # via
     #   -r requirements/base.txt
     #   openedx-events
@@ -111,11 +111,11 @@ kombu==5.4.2
     #   celery
 markupsafe==3.0.2
     # via jinja2
-newrelic==10.4.0
+newrelic==10.5.0
     # via
     #   -r requirements/base.txt
     #   edx-django-utils
-openedx-events==9.15.2
+openedx-events==9.17.0
     # via -r requirements/base.txt
 packaging==24.2
     # via pytest
@@ -125,7 +125,7 @@ pbr==6.1.0
     #   stevedore
 pluggy==1.5.0
     # via pytest
-prompt-toolkit==3.0.49
+prompt-toolkit==3.0.50
     # via
     #   -r requirements/base.txt
     #   click-repl
@@ -137,7 +137,7 @@ pycparser==2.22
     # via
     #   -r requirements/base.txt
     #   cffi
-pymongo==4.10.1
+pymongo==4.11
     # via
     #   -r requirements/base.txt
     #   edx-opaque-keys
@@ -184,7 +184,7 @@ typing-extensions==4.12.2
     # via
     #   -r requirements/base.txt
     #   edx-opaque-keys
-tzdata==2024.2
+tzdata==2025.1
     # via
     #   -r requirements/base.txt
     #   celery

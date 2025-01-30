@@ -66,7 +66,7 @@ How Does it Work?
 Each of the above events is handled by Django Signal handlers. When these signals are emitted, they are intercepted by handlers defined in the repository, which transform and forward the event data to a `Zapier webhook`_.
 
 Django Signal Handlers
-~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
 
 In the file `handlers.py`_, handlers listen to Django signals using the standard `receiver`_ decorator:
 

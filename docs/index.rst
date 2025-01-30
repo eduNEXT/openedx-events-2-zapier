@@ -3,10 +3,10 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-openedx-events-2-zapier
-=======================
+Open edX Events 2 Zapier
+========================
 
-This repository contains real-life use cases for Open edX Events.
+A ready-to-use repository demonstrating how to use Open edX Events for building workflows and automating integrations. It serves as a starting point for more advanced use cases.
 
 Contents:
 
@@ -14,17 +14,4 @@ Contents:
    :maxdepth: 2
 
    readme
-   getting_started
-   testing
-   internationalization
-   modules
-   changelog
-   decisions
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   handlers
