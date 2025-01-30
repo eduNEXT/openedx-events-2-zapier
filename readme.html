@@ -425,6 +425,7 @@
 <section id="documentation">
 <h3>Documentation<a class="headerlink" href="#documentation" title="Link to this heading">#</a></h3>
 <p>Refer to the <a class="reference external" href="https://docs.openedx.org/projects/openedx-events/en/latest/">Open edX Events documentation</a> to learn about implementing and working with events. This documentation details how to use the repository to integrate with third-party services, such as Zapier Webhooks, through events.</p>
+<p>You can review the rendered documentation at <a class="reference external" href="https://edunext.github.io/openedx-events-2-zapier/">https://edunext.github.io/openedx-events-2-zapier/</a>.</p>
 <section id="features">
 <h4>Features<a class="headerlink" href="#features" title="Link to this heading">#</a></h4>
 <ul class="simple">
@@ -452,8 +453,8 @@
 <td><p>org.openedx.learning.course.enrollment.created.v1</p></td>
 <td><p>Triggered upon successful course enrollment.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference external" href="https://docs.openedx.org/projects/openedx-events/en/latest/reference/events.html#openedxevent-org.openedx.learning.course.persistent_grade.summary.v1">PERSISTENT_GRADE_SUMMARY_CHANGED</a></p></td>
-<td><p>org.openedx.learning.course.persistent_grade.summary.v1</p></td>
+<tr class="row-even"><td><p><a class="reference external" href="https://docs.openedx.org/projects/openedx-events/en/latest/reference/events.html#openedxevent-org.openedx.learning.course.persistent_grade_summary.v1">PERSISTENT_GRADE_SUMMARY_CHANGED</a></p></td>
+<td><p>org.openedx.learning.course.persistent_grade_summary.v1</p></td>
 <td><p>Triggered when a persistent grade summary is updated. This happens
 when a grade changes in a course.</p></td>
 </tr>
@@ -466,7 +467,7 @@ when a grade changes in a course.</p></td>
 <p>Each of the above events is handled by Django Signal handlers. When these signals are emitted, they are intercepted by handlers defined in the repository, which transform and forward the event data to a <a class="reference external" href="https://zapier.com/">Zapier webhook</a>.</p>
 <section id="django-signal-handlers">
 <h5>Django Signal Handlers<a class="headerlink" href="#django-signal-handlers" title="Link to this heading">#</a></h5>
-<p>In the file <a class="reference external" href="openedx_events_2_zapier/handlers.py">handlers.py</a>, handlers listen to Django signals using the standard <a class="reference external" href="https://docs.djangoproject.com/en/4.2/topics/signals/#connecting-receiver-functions">receiver</a> decorator:</p>
+<p>In the file <a class="reference external" href="https://github.com/eduNEXT/openedx-events-2-zapier/handlers.py">handlers.py</a>, handlers listen to Django signals using the standard <a class="reference external" href="https://docs.djangoproject.com/en/4.2/topics/signals/#connecting-receiver-functions">receiver</a> decorator:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">django.dispatch</span><span class="w"> </span><span class="kn">import</span> <span class="n">receiver</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">openedx_events.signals</span><span class="w"> </span><span class="kn">import</span> <span class="n">STUDENT_REGISTRATION_COMPLETED</span>
 
@@ -543,13 +544,13 @@ when a grade changes in a course.</p></td>
 <li><p>Configure Zapier webhooks to receive the event data, follow the instructions available in the Zapier documentation.</p></li>
 <li><p>Trigger the events by registering a new user, enrolling in a course, or updating a grade in the Open edX platform.</p></li>
 </ol>
-<p>To send event data to other services or APIs, simply configure more webhooks in the Django settings. The handlers are intentionally generic, ensuring they work seamlessly with different kinds of services. You can also add more event handlers to the <a class="reference external" href="openedx_events_2_zapier/handlers.py">handlers.py</a> file to listen to additional events.</p>
+<p>To send event data to other services or APIs, simply configure more webhooks in the Django settings. The handlers are intentionally generic, ensuring they work seamlessly with different kinds of services. You can also add more event handlers to the <a class="reference external" href="https://github.com/eduNEXT/openedx-events-2-zapier/handlers.py">handlers.py</a> file to listen to additional events.</p>
 </section>
 <section id="how-to-extend-this-repository">
 <h4>How to Extend this Repository<a class="headerlink" href="#how-to-extend-this-repository" title="Link to this heading">#</a></h4>
 <p>This repository is a starting point for Open edX developers:</p>
 <ul class="simple">
-<li><p>You can add new event handlers by following the structure in <a class="reference external" href="openedx_events_2_zapier/handlers.py">handlers.py</a>.</p></li>
+<li><p>You can add new event handlers by following the structure in <a class="reference external" href="https://github.com/eduNEXT/openedx-events-2-zapier/handlers.py">handlers.py</a>.</p></li>
 <li><p>Custom logic can be implemented to fit your organization’s data flow requirements using Zapier, third-party APIs, or internal services.</p></li>
 </ul>
 <p>For details on extending Open edX with Open edX Events, see also:</p>
