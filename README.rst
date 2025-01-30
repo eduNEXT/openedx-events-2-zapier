@@ -38,6 +38,8 @@ Documentation
 
 Refer to the `Open edX Events documentation`_ to learn about implementing and working with events. This documentation details how to use the repository to integrate with third-party services, such as Zapier Webhooks, through events.
 
+You can review the rendered documentation at https://edunext.github.io/openedx-events-2-zapier/.
+
 Features
 --------
 
