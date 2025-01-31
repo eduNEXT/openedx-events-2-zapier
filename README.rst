@@ -194,7 +194,7 @@ License
 The code in this repository is licensed under the AGPL 3.0 unless
 otherwise noted.
 
-Please see `LICENSE.txt <LICENSE.txt>`_ for details.
+Please see `LICENSE.txt`_ for details.
 
 Contributing
 ************
@@ -219,7 +219,7 @@ All community members are expected to follow the `Open edX Code of Conduct`_.
 People
 ******
 
-This repository is currently being maintained by the eduNEXT team. See the `CODEOWNERS <.github/CODEOWNERS>`_ file for details.
+This repository is currently being maintained by the eduNEXT team. See the `CODEOWNERS`_ file for details.
 
 Reporting Security Issues
 *************************
@@ -238,6 +238,8 @@ Please do not report security issues in public. Please email security@edunext.co
 .. _Real-Life Use Cases for Open edX Events: https://docs.openedx.org/projects/openedx-events/en/latest/reference/real-life-use-cases.html
 .. _Tutor plugin: https://docs.tutor.edly.io/plugins/intro.html#plugins
 .. _Tutor documentation: https://docs.tutor.edly.io/
+.. _CODEOWNERS: https://github.com/eduNEXT/openedx-events-2-zapier/blob/main/.github/CODEOWNERS
+.. _LICENSE.txt: https://github.com/eduNEXT/openedx-events-2-zapier/blob/main/LICENSE.txt
 
 .. |ci-badge| image:: https://github.com/eduNEXT/openedx-events-2-zapier/workflows/Python%20CI/badge.svg?branch=main
     :target: https://github.com/eduNEXT/openedx-events-2-zapier/actions
