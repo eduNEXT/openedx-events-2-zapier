@@ -51,16 +51,16 @@ Features
 Supported Events
 ----------------
 
-+-------------------------------------+------------------------------------------------------------+---------------------------------------------------------------------+
-| **Event Name**                      | **Event Type**                                             | **Description**                                                     |
-+=====================================+============================================================+=====================================================================+
-| `STUDENT_REGISTRATION_COMPLETED`_   | org.openedx.learning.student.registration.completed.v1     | Triggered when a user completes registration in the LMS.            |
-+-------------------------------------+------------------------------------------------------------+---------------------------------------------------------------------+
-| `COURSE_ENROLLMENT_CREATED`_        | org.openedx.learning.course.enrollment.created.v1          | Triggered upon successful course enrollment.                        |
-+-------------------------------------+------------------------------------------------------------+---------------------------------------------------------------------+
-| `PERSISTENT_GRADE_SUMMARY_CHANGED`_ | org.openedx.learning.course.persistent_grade_summary.v1    | Triggered when a persistent grade summary is updated. This happens  |
-|                                     |                                                            | when a grade changes in a course.                                   |
-+-------------------------------------+------------------------------------------------------------+---------------------------------------------------------------------+
++-------------------------------------+-----------------------------------------------------------------+---------------------------------------------------------------------+
+| **Event Name**                      | **Event Type**                                                  | **Description**                                                     |
++=====================================+=================================================================+=====================================================================+
+| `STUDENT_REGISTRATION_COMPLETED`_   | org.openedx.learning.student.registration.completed.v1          | Triggered when a user completes registration in the LMS.            |
++-------------------------------------+-----------------------------------------------------------------+---------------------------------------------------------------------+
+| `COURSE_ENROLLMENT_CREATED`_        | org.openedx.learning.course.enrollment.created.v1               | Triggered upon successful course enrollment.                        |
++-------------------------------------+-----------------------------------------------------------------+---------------------------------------------------------------------+
+| `PERSISTENT_GRADE_SUMMARY_CHANGED`_ | org.openedx.learning.course.persistent_grade_summary.changed.v1 | Triggered when a persistent grade summary is updated. This happens  |
+|                                     |                                                                 | when a grade changes in a course.                                   |
++-------------------------------------+-----------------------------------------------------------------+---------------------------------------------------------------------+
 
 How Does it Work?
 -----------------
@@ -231,8 +231,8 @@ Please do not report security issues in public. Please email security@edunext.co
 .. _Open edX Events Documentation: https://docs.openedx.org/projects/openedx-events/en/latest/
 .. _STUDENT_REGISTRATION_COMPLETED: https://docs.openedx.org/projects/openedx-events/en/latest/reference/events.html#openedxevent-org.openedx.learning.student.registration.completed.v1
 .. _COURSE_ENROLLMENT_CREATED: https://docs.openedx.org/projects/openedx-events/en/latest/reference/events.html#openedxevent-org.openedx.learning.course.enrollment.created.v1
-.. _PERSISTENT_GRADE_SUMMARY_CHANGED: https://docs.openedx.org/projects/openedx-events/en/latest/reference/events.html#openedxevent-org.openedx.learning.course.persistent_grade_summary.v1
-.. _handlers.py: https://github.com/eduNEXT/openedx-events-2-zapier/handlers.py
+.. _PERSISTENT_GRADE_SUMMARY_CHANGED: https://docs.openedx.org/projects/openedx-events/en/latest/reference/events.html#openedxevent-org.openedx.learning.course.persistent_grade_summary.changed.v1
+.. _handlers.py: https://github.com/eduNEXT/openedx-events-2-zapier/blob/main/openedx_events_2_zapier/handlers.py
 .. _receiver: https://docs.djangoproject.com/en/4.2/topics/signals/#connecting-receiver-functions
 .. _Zapier webhook: https://zapier.com/
 .. _Real-Life Use Cases for Open edX Events: https://docs.openedx.org/projects/openedx-events/en/latest/reference/real-life-use-cases.html
