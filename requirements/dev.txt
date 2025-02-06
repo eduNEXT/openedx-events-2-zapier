@@ -17,7 +17,7 @@ astroid==3.3.8
     #   -r requirements/quality.txt
     #   pylint
     #   pylint-celery
-attrs==24.3.0
+attrs==25.1.0
     # via
     #   -r requirements/quality.txt
     #   openedx-events
@@ -33,7 +33,7 @@ build==1.2.2.post1
     # via
     #   -r requirements/pip-tools.txt
     #   pip-tools
-cachetools==5.5.0
+cachetools==5.5.1
     # via
     #   -r requirements/ci.txt
     #   tox
@@ -155,7 +155,7 @@ edx-django-utils==7.1.0
     #   openedx-events
 edx-i18n-tools==1.6.3
     # via -r requirements/dev.in
-edx-lint==5.4.1
+edx-lint==5.6.0
     # via -r requirements/quality.txt
 edx-opaque-keys[django]==2.11.0
     # via
@@ -166,17 +166,21 @@ fastavro==1.10.0
     # via
     #   -r requirements/quality.txt
     #   openedx-events
-filelock==3.16.1
+filelock==3.17.0
     # via
     #   -r requirements/ci.txt
     #   tox
     #   virtualenv
+id==1.5.0
+    # via
+    #   -r requirements/quality.txt
+    #   twine
 idna==3.10
     # via
     #   -r requirements/ci.txt
     #   -r requirements/quality.txt
     #   requests
-importlib-metadata==8.5.0
+importlib-metadata==8.6.1
     # via
     #   -r requirements/quality.txt
     #   keyring
@@ -184,7 +188,7 @@ iniconfig==2.0.0
     # via
     #   -r requirements/quality.txt
     #   pytest
-isort==5.13.2
+isort==6.0.0
     # via
     #   -r requirements/quality.txt
     #   pylint
@@ -245,7 +249,7 @@ more-itertools==10.6.0
     #   -r requirements/quality.txt
     #   jaraco-classes
     #   jaraco-functools
-newrelic==10.4.0
+newrelic==10.5.0
     # via
     #   -r requirements/quality.txt
     #   edx-django-utils
@@ -253,7 +257,7 @@ nh3==0.2.20
     # via
     #   -r requirements/quality.txt
     #   readme-renderer
-openedx-events==9.15.2
+openedx-events==9.17.0
     # via -r requirements/quality.txt
 packaging==24.2
     # via
@@ -273,10 +277,6 @@ pbr==6.1.0
     #   stevedore
 pip-tools==7.4.1
     # via -r requirements/pip-tools.txt
-pkginfo==1.12.0
-    # via
-    #   -r requirements/quality.txt
-    #   twine
 platformdirs==4.3.6
     # via
     #   -r requirements/ci.txt
@@ -293,7 +293,7 @@ pluggy==1.5.0
     #   tox
 polib==1.2.0
     # via edx-i18n-tools
-prompt-toolkit==3.0.49
+prompt-toolkit==3.0.50
     # via
     #   -r requirements/quality.txt
     #   click-repl
@@ -315,7 +315,7 @@ pygments==2.19.1
     #   diff-cover
     #   readme-renderer
     #   rich
-pylint==3.3.3
+pylint==3.3.4
     # via
     #   -r requirements/quality.txt
     #   edx-lint
@@ -335,7 +335,7 @@ pylint-plugin-utils==0.8.2
     #   -r requirements/quality.txt
     #   pylint-celery
     #   pylint-django
-pymongo==4.10.1
+pymongo==4.11
     # via
     #   -r requirements/quality.txt
     #   edx-opaque-keys
@@ -343,7 +343,7 @@ pynacl==1.5.0
     # via
     #   -r requirements/quality.txt
     #   edx-django-utils
-pyproject-api==1.8.0
+pyproject-api==1.9.0
     # via
     #   -r requirements/ci.txt
     #   tox
@@ -383,6 +383,7 @@ requests==2.32.3
     #   -r requirements/ci.txt
     #   -r requirements/quality.txt
     #   codecov
+    #   id
     #   requests-toolbelt
     #   twine
 requests-toolbelt==1.0.0
@@ -429,15 +430,15 @@ tomlkit==0.13.2
     # via
     #   -r requirements/quality.txt
     #   pylint
-tox==4.23.2
+tox==4.24.1
     # via -r requirements/ci.txt
-twine==6.0.1
+twine==6.1.0
     # via -r requirements/quality.txt
 typing-extensions==4.12.2
     # via
     #   -r requirements/quality.txt
     #   edx-opaque-keys
-tzdata==2024.2
+tzdata==2025.1
     # via
     #   -r requirements/quality.txt
     #   celery

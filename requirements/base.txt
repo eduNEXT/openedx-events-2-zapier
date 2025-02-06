@@ -8,7 +8,7 @@ amqp==5.3.1
     # via kombu
 asgiref==3.8.1
     # via django
-attrs==24.3.0
+attrs==25.1.0
     # via openedx-events
 billiard==4.2.1
     # via celery
@@ -61,19 +61,19 @@ idna==3.10
     # via requests
 kombu==5.4.2
     # via celery
-newrelic==10.4.0
+newrelic==10.5.0
     # via edx-django-utils
-openedx-events==9.15.2
+openedx-events==9.17.0
     # via -r requirements/base.in
 pbr==6.1.0
     # via stevedore
-prompt-toolkit==3.0.49
+prompt-toolkit==3.0.50
     # via click-repl
 psutil==6.1.1
     # via edx-django-utils
 pycparser==2.22
     # via cffi
-pymongo==4.10.1
+pymongo==4.11
     # via edx-opaque-keys
 pynacl==1.5.0
     # via edx-django-utils
@@ -93,7 +93,7 @@ stevedore==5.4.0
     #   edx-opaque-keys
 typing-extensions==4.12.2
     # via edx-opaque-keys
-tzdata==2024.2
+tzdata==2025.1
     # via
     #   celery
     #   kombu
